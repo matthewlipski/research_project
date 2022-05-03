@@ -1,7 +1,14 @@
-.pio
+# Top-level
 .git
+
+
+# Training
 .idea
-cmake-build-nano33ble/
+training/venv/
+training/__pycache__/
+
+
+# Inference
+.pio
 CMakeListsPrivate.txt
-venv/
-__pycache__/
+inference/cmake-build-nano33ble/
