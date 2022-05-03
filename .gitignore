@@ -10,5 +10,4 @@ training/__pycache__/
 
 # Inference
 .pio
-CMakeListsPrivate.txt
 inference/cmake-build-nano33ble/
