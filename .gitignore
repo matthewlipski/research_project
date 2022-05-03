@@ -1,8 +1,8 @@
 .pio
 .git
 .idea
-/cmake*
-./cmake*
+/cmake-build-nano33ble
+./cmake-build-nano33ble
 CMakeListsPrivate.txt
 /__pycache__
 ./__pycache__
