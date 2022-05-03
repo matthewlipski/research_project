@@ -1,0 +1,11 @@
+.pio
+.git
+.idea
+/cmake*
+./cmake*
+CMakeListsPrivate.txt
+/__pycache__
+./__pycache__
+/venv
+./venv
+__pycache__/
