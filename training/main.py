@@ -7,10 +7,10 @@ from datasets import *
 from models import *
 
 if __name__ == '__main__':
-    FRAME_SIZE: int = 10
+    FRAME_SIZE: int = 1
     NUM_VALIDATION_FOLDS: int = 2  # TODO: Crashes when equal to 1
-    BATCH_SIZE: int = 32
-    NUM_EPOCHS: int = 10
+    BATCH_SIZE: int = 128
+    NUM_EPOCHS: int = 100
 
     data_set: DataSet = u_wave_gesture_library(FRAME_SIZE)
     data_set = normalize_data_set(data_set)
@@ -18,16 +18,15 @@ if __name__ == '__main__':
 
     folded_data_set: List[Tuple[DataSet, DataSet]] = fold_data_set(data_set, NUM_VALIDATION_FOLDS)
     data_set_info = get_data_set_info(data_set)
-    print(len(folded_data_set[0]))
 
     training_accuracy: List[float] = []
     validation_accuracy: List[float] = []
 
     for i in range(len(folded_data_set)):
-        model: keras.models.Model = rnn(data_set_info.num_features,
-                                        data_set_info.num_classes,
-                                        data_set_info.sequence_length,
-                                        32)
+        model: keras.models.Model = conv_2d(data_set_info.num_features,
+                                            data_set_info.num_classes,
+                                            data_set_info.sequence_length,
+                                            32)
 
         x_training = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, folded_data_set[i][0])))
         y_training = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, folded_data_set[i][0])))
@@ -69,10 +68,10 @@ if __name__ == '__main__':
     print('################################################################################################')
     print()
 
-    model: keras.models.Model = rnn(data_set_info.num_features,
-                                    data_set_info.num_classes,
-                                    data_set_info.sequence_length,
-                                    32)
+    model: keras.models.Model = conv_2d(data_set_info.num_features,
+                                        data_set_info.num_classes,
+                                        data_set_info.sequence_length,
+                                        32)
 
     x = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, data_set)))
     y = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, data_set)))
@@ -90,14 +89,15 @@ if __name__ == '__main__':
     print('################################################################################################')
     print()
 
-    # TODO: Figure out how to make this garbage work
+    # TODO: Figure out if this garbage works
     # # Save optimized model
-    # def representative_dataset_generator() -> List[np.ndarray]:
-    #     # Generates values from a representative sample of the dataset
-    #     # In this case the sample is just the whole dataset
-    #     for time_sequence in x:
-    #         # Each scalar value must be inside a 2D array that is wrapped in a list
-    #         yield np.array(time_sequence, dtype=np.float32)
+    def representative_dataset_generator() -> List[np.ndarray]:
+        # Generate values from a representative sample of the dataset
+        # In this case the sample is just the whole dataset
+        for time_sequence in x:
+            # Each scalar value must be inside a 2D array that is wrapped in a list
+            yield [np.array([time_sequence], dtype=np.float32)]
+
 
     # Convert model to TensorFlow Lite
     converter: tf.lite.TFLiteConverter = tf.lite.TFLiteConverter.from_keras_model(model)
