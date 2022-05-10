@@ -22,27 +22,38 @@ def u_wave_gesture_library(frame_size: int = 1) -> DataSet:
             time_sequence: TimeSequence3D = []
             time_frame: TimeFrame = []
 
-            for time_step_num in range(len(row['relationalAtt'][0])):
+            for time_step_num in range(1, 316):
                 time_step: TimeStep = [
-                    row['relationalAtt'][0][time_step_num],
-                    row['relationalAtt'][1][time_step_num],
-                    row['relationalAtt'][2][time_step_num]
+                    row['att' + str(time_step_num)],
+                    row['att' + str(315 + time_step_num)],
+                    row['att' + str(630 + time_step_num)]
                 ]
                 time_frame.append(time_step)
 
-                if (time_step_num + 1) % frame_size == 0:
+                if time_step_num % frame_size == 0:
                     time_sequence.append(time_frame)
                     time_frame = []
 
             class_encoding: ClassEncoding = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-            class_encoding[int(float(row['classAttribute'])) - 1] = 1.0
+            class_encoding[int(row['target']) - 1] = 1.0
 
             data_instance: DataInstance = DataInstance(time_sequence, class_encoding)
             data_set.append(data_instance)
 
-    add_data_from_file('./datasets/UWaveGestureLibrary/UWaveGestureLibrary_TRAIN.arff')
-    add_data_from_file('./datasets/UWaveGestureLibrary/UWaveGestureLibrary_TEST.arff')
+    print()
+    print('################################################################################################')
+    print('Reading dataset...')
+    print('################################################################################################')
+    print()
+
+    add_data_from_file('./datasets/UWaveGestureLibraryAll/UWaveGestureLibraryAll_TRAIN.arff')
+    add_data_from_file('./datasets/UWaveGestureLibraryAll/UWaveGestureLibraryAll_TEST.arff')
 
     random.shuffle(data_set)
 
     return data_set
+
+
+load_data_set = {
+    'u_wave': u_wave_gesture_library
+}

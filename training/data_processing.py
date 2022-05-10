@@ -98,22 +98,37 @@ def flatten_data_set(data_set: DataSet) -> DataSet:
 def fold_data_set(data_set: DataSet, num_folds: int) -> List[Tuple[DataSet, DataSet]]:
     folds: List[Tuple[DataSet, DataSet]] = []
 
-    fold_size: int = len(data_set) // num_folds
+    if num_folds == 1:
+        fold_size: int = len(data_set) // 10
 
-    for fold_num in range(num_folds):
         training_set: DataSet = []
         validation_set: DataSet = []
 
-        for i in range(0, fold_num * fold_size):
+        for i in range(0, 9 * fold_size):
             training_set.append(data_set[i])
 
-        for i in range(fold_num * fold_size, (fold_num + 1) * fold_size):
+        for i in range(9 * fold_size, 10 * fold_size):
             validation_set.append(data_set[i])
 
-        for i in range((fold_num + 1) * fold_size, num_folds * fold_size):
-            training_set.append(data_set[i])
-
         folds.append((training_set, validation_set))
+
+    else:
+        for fold_num in range(num_folds):
+            fold_size: int = len(data_set) // num_folds
+
+            training_set: DataSet = []
+            validation_set: DataSet = []
+
+            for i in range(0, fold_num * fold_size):
+                training_set.append(data_set[i])
+
+            for i in range(fold_num * fold_size, (fold_num + 1) * fold_size):
+                validation_set.append(data_set[i])
+
+            for i in range((fold_num + 1) * fold_size, num_folds * fold_size):
+                training_set.append(data_set[i])
+
+            folds.append((training_set, validation_set))
 
     return folds
 

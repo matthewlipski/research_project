@@ -7,12 +7,15 @@ from datasets import *
 from models import *
 
 if __name__ == '__main__':
-    FRAME_SIZE: int = 1
-    NUM_VALIDATION_FOLDS: int = 2  # TODO: Crashes when equal to 1
-    BATCH_SIZE: int = 128
-    NUM_EPOCHS: int = 100
+    DATA_SET_NAME: str = 'u_wave'
+    FRAME_SIZE: int = 20
+    NUM_VALIDATION_FOLDS: int = 1
 
-    data_set: DataSet = u_wave_gesture_library(FRAME_SIZE)
+    MODEL_NAME: str = 'lstm'
+    BATCH_SIZE: int = 32
+    NUM_EPOCHS: int = 200
+
+    data_set: DataSet = load_data_set[DATA_SET_NAME](FRAME_SIZE)
     data_set = normalize_data_set(data_set)
     data_set = flatten_data_set(data_set)
 
@@ -23,10 +26,10 @@ if __name__ == '__main__':
     validation_accuracy: List[float] = []
 
     for i in range(len(folded_data_set)):
-        model: keras.models.Model = conv_2d(data_set_info.num_features,
-                                            data_set_info.num_classes,
-                                            data_set_info.sequence_length,
-                                            32)
+        model: keras.models.Model = create_model[MODEL_NAME](data_set_info.num_features,
+                                                             data_set_info.num_classes,
+                                                             data_set_info.sequence_length,
+                                                             32)
 
         x_training = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, folded_data_set[i][0])))
         y_training = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, folded_data_set[i][0])))
@@ -37,29 +40,26 @@ if __name__ == '__main__':
 
         print()
         print('################################################################################################')
-        print('Fold', fold_number, 'validation commencing...')
+        print('Fold', fold_number, 'training commencing...')
         print('################################################################################################')
         print()
 
-        history = model.fit(
+        fold_training_accuracy = model.fit(
             x_training,
             y_training,
             epochs=NUM_EPOCHS,
             batch_size=BATCH_SIZE,
-        )
-
-        y_prediction = model(x_validation)
-
-        fold_training_accuracy: float = history.history['categorical_accuracy'][-1]
-        fold_validation_accuracy: float = 0.0
-
-        for index in range(len(y_prediction)):
-            if np.argmax(y_prediction[index]) != np.argmax(y_validation[index]):
-                fold_validation_accuracy += 1
-
-        fold_validation_accuracy = 1 - (fold_validation_accuracy / len(y_prediction))
-
+            validation_data=(x_validation, y_validation)
+        ).history['categorical_accuracy'][-1]
         training_accuracy.append(fold_training_accuracy)
+
+        print()
+        print('################################################################################################')
+        print('Fold', fold_number, 'validation commencing...')
+        print('################################################################################################')
+        print()
+
+        fold_validation_accuracy: float = model.evaluate(x_validation, y_validation)[-1]
         validation_accuracy.append(fold_validation_accuracy)
 
     print()
@@ -68,10 +68,10 @@ if __name__ == '__main__':
     print('################################################################################################')
     print()
 
-    model: keras.models.Model = conv_2d(data_set_info.num_features,
-                                        data_set_info.num_classes,
-                                        data_set_info.sequence_length,
-                                        32)
+    model: keras.models.Model = create_model[MODEL_NAME](data_set_info.num_features,
+                                                         data_set_info.num_classes,
+                                                         data_set_info.sequence_length,
+                                                         64)
 
     x = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, data_set)))
     y = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, data_set)))
@@ -89,8 +89,7 @@ if __name__ == '__main__':
     print('################################################################################################')
     print()
 
-    # TODO: Figure out if this garbage works
-    # # Save optimized model
+    # Save optimized model
     def representative_dataset_generator() -> List[np.ndarray]:
         # Generate values from a representative sample of the dataset
         # In this case the sample is just the whole dataset
@@ -106,13 +105,17 @@ if __name__ == '__main__':
         tf.lite.OpsSet.SELECT_TF_OPS  # enable TensorFlow ops.
     ]
     # Default space & latency optimizations e.g. quantization
-    # converter.optimizations = [tf.lite.Optimize.DEFAULT]
-    # converter.representative_dataset = representative_dataset_generator
+    converter.optimizations = [tf.lite.Optimize.DEFAULT]
+    converter.representative_dataset = representative_dataset_generator
 
     tf_lite_model = converter.convert()
 
     # Save model to file
-    file_name: str = datetime.now().strftime('%m-%d-%Y_%H-%M-%S') + '.tflite'
+    file_name: str = \
+        MODEL_NAME + '_' + \
+        DATA_SET_NAME + '_' + \
+        str(round(sum(validation_accuracy) / len(validation_accuracy), 2)) + '_' + \
+        datetime.now().strftime('%m-%d-%Y_%H-%M-%S') + '.tflite'
     model_file: IO = open('./models/' + file_name, 'wb')
     model_file.write(tf_lite_model)
     model_file.close()

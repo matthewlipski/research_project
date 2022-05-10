@@ -6,38 +6,7 @@ def rnn(num_features: int, num_classes: int, sequence_length: int, num_neurons: 
     model: keras.models.Model = keras.models.Sequential()
 
     model.add(keras.layers.SimpleRNN(num_neurons, input_shape=(sequence_length, num_features)))
-    # model.add(keras.layers.Conv1D(neurons_per_layer, 3, input_shape=(sequence_length, num_features)))
-    # model.add(keras.layers.Conv2D(neurons_per_layer, 3, input_shape=(sequence_length, num_features, 1)))
-    # model.add(keras.layers.Conv2D(neurons_per_layer, 3))
-    # model.add(keras.layers.Dropout(0.5))
-    # model.add(keras.layers.Dense(neurons_per_layer))
-    # model.add(keras.layers.MaxPooling1D(pool_size=2))
-    # model.add(keras.layers.Flatten())
-    # model.add(keras.layers.Dropout(0.5))
-    # model.add(keras.layers.Dense(num_gestures, activation='relu'))
-    model.add(keras.layers.Dense(num_classes, activation='softmax'))
-
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-
-    return model
-
-
-def conv_1d(num_features: int, num_classes: int, sequence_length: int, num_neurons: int) -> keras.models.Model:
-    model: keras.models.Model = keras.models.Sequential()
-
-    model.add(keras.layers.Conv1D(num_neurons, 3, input_shape=(sequence_length, num_features)))
-    model.add(keras.layers.Flatten())
-    model.add(keras.layers.Dense(num_classes, activation='softmax'))
-
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-
-    return model
-
-
-def lstm(num_features: int, num_classes: int, sequence_length: int, num_neurons: int) -> keras.models.Model:
-    model: keras.models.Model = keras.models.Sequential()
-
-    model.add(keras.layers.LSTM(num_neurons, input_shape=(sequence_length, num_features)))
+    model.add(keras.layers.Dropout(0.5))
     model.add(keras.layers.Dense(num_classes, activation='softmax'))
 
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
@@ -49,6 +18,74 @@ def gru(num_features: int, num_classes: int, sequence_length: int, num_neurons: 
     model: keras.models.Model = keras.models.Sequential()
 
     model.add(keras.layers.GRU(num_neurons, input_shape=(sequence_length, num_features)))
+    model.add(keras.layers.Dropout(0.5))
+    model.add(keras.layers.Dense(num_classes, activation='softmax'))
+
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+
+    return model
+
+
+def lstm(num_features: int, num_classes: int, sequence_length: int, num_neurons: int) -> keras.models.Model:
+    model: keras.models.Model = keras.models.Sequential()
+
+    model.add(keras.layers.LSTM(num_neurons, input_shape=(sequence_length, num_features)))
+    model.add(keras.layers.Dropout(0.5))
+    model.add(keras.layers.Dense(num_classes, activation='softmax'))
+
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+
+    return model
+
+
+def conv_1d(num_features: int, num_classes: int, sequence_length: int, num_neurons: int) -> keras.models.Model:
+    model: keras.models.Model = keras.models.Sequential()
+
+    model.add(keras.layers.Conv1D(num_neurons, 3, input_shape=(sequence_length, num_features)))
+    model.add(keras.layers.Dropout(0.5))
+    model.add(keras.layers.Flatten())
+    model.add(keras.layers.Dense(num_classes, activation='softmax'))
+
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+
+    return model
+
+
+def conv_2d(num_features: int, num_classes: int, sequence_length: int, num_neurons: int) -> keras.models.Model:
+    model: keras.models.Model = keras.models.Sequential()
+
+    model.add(keras.layers.Conv2D(32, 2, activation='relu', input_shape=(sequence_length, num_features, 1)))
+    model.add(keras.layers.Conv2D(32, 2, activation='relu'))
+    model.add(keras.layers.MaxPooling2D(pool_size=(3, 1)))
+    model.add(keras.layers.Conv2D(16, kernel_size=(5, 1), activation='relu'))
+    model.add(keras.layers.Flatten())
+    model.add(keras.layers.Dropout(0.5))
+    model.add(keras.layers.Dense(num_classes, activation='softmax'))
+
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+
+    return model
+
+
+def conv_lstm_1d(num_features: int, num_classes: int, sequence_length: int, frame_length: int, num_neurons: int) -> keras.models.Model:
+    model: keras.models.Model = keras.models.Sequential()
+
+    model.add(keras.layers.ConvLSTM1D(num_neurons, 3, input_shape=(sequence_length, frame_length, 3)))
+    model.add(keras.layers.Flatten())
+    model.add(keras.layers.Dropout(0.5))
+    model.add(keras.layers.Dense(num_classes, activation='softmax'))
+
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+
+    return model
+
+
+def conv_lstm_2d(num_features: int, num_classes: int, sequence_length: int, frame_length: int, num_neurons: int) -> keras.models.Model:
+    model: keras.models.Model = keras.models.Sequential()
+
+    model.add(keras.layers.ConvLSTM2D(num_neurons, 3, input_shape=(sequence_length, frame_length, 3, 1)))
+    model.add(keras.layers.Flatten())
+    model.add(keras.layers.Dropout(0.5))
     model.add(keras.layers.Dense(num_classes, activation='softmax'))
 
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
@@ -89,18 +126,14 @@ def transformer(num_features: int, num_classes: int, sequence_length: int, num_n
     return keras.Model(inputs, outputs)
 
 
-def conv_2d(num_features: int, num_classes: int, sequence_length: int, num_neurons: int) -> keras.models.Model:
-    model: keras.models.Model = keras.models.Sequential()
-
-    model.add(keras.layers.Conv2D(32, 2, activation='relu', input_shape=(sequence_length, num_features, 1)))
-    model.add(keras.layers.Conv2D(32, 2, activation='relu'))
-    model.add(keras.layers.MaxPooling2D(pool_size=(3, 1)))
-    model.add(keras.layers.Conv2D(16, kernel_size=(5, 1), activation='relu'))
-    model.add(keras.layers.Flatten())
-    model.add(keras.layers.Dropout(0.5))
-    model.add(keras.layers.Dense(num_classes, activation='softmax'))
-
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-
-    return model
+create_model = {
+    'rnn': rnn,
+    'gru': gru,
+    'lstm': lstm,
+    'conv_1d': conv_1d,
+    'conv_2d': conv_2d,
+    'conv_lstm_1d': conv_lstm_1d,
+    'conv_lstm_2d': conv_lstm_2d,
+    'transformer': transformer
+}
 
