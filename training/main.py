@@ -11,13 +11,13 @@ if __name__ == '__main__':
     FRAME_SIZE: int = 20
     NUM_VALIDATION_FOLDS: int = 1
 
-    MODEL_NAME: str = 'lstm'
+    MODEL_NAME: str = 'conv_lstm_2d'
     BATCH_SIZE: int = 32
     NUM_EPOCHS: int = 200
 
     data_set: DataSet = load_data_set[DATA_SET_NAME](FRAME_SIZE)
     data_set = normalize_data_set(data_set)
-    data_set = flatten_data_set(data_set)
+    # data_set = flatten_data_set(data_set)
 
     folded_data_set: List[Tuple[DataSet, DataSet]] = fold_data_set(data_set, NUM_VALIDATION_FOLDS)
     data_set_info = get_data_set_info(data_set)
@@ -29,6 +29,7 @@ if __name__ == '__main__':
         model: keras.models.Model = create_model[MODEL_NAME](data_set_info.num_features,
                                                              data_set_info.num_classes,
                                                              data_set_info.sequence_length,
+                                                             FRAME_SIZE,
                                                              32)
 
         x_training = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, folded_data_set[i][0])))

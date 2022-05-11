@@ -46,8 +46,8 @@ def u_wave_gesture_library(frame_size: int = 1) -> DataSet:
     print('################################################################################################')
     print()
 
-    add_data_from_file('./datasets/UWaveGestureLibraryAll/UWaveGestureLibraryAll_TRAIN.arff')
-    add_data_from_file('./datasets/UWaveGestureLibraryAll/UWaveGestureLibraryAll_TEST.arff')
+    add_data_from_file('./datasets/u_wave/UWaveGestureLibraryAll_TRAIN.arff')
+    add_data_from_file('./datasets/u_wave/UWaveGestureLibraryAll_TEST.arff')
 
     random.shuffle(data_set)
 

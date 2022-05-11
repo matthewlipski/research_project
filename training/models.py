@@ -83,7 +83,15 @@ def conv_lstm_1d(num_features: int, num_classes: int, sequence_length: int, fram
 def conv_lstm_2d(num_features: int, num_classes: int, sequence_length: int, frame_length: int, num_neurons: int) -> keras.models.Model:
     model: keras.models.Model = keras.models.Sequential()
 
-    model.add(keras.layers.ConvLSTM2D(num_neurons, 3, input_shape=(sequence_length, frame_length, 3, 1)))
+    # model.add(keras.layers.ConvLSTM2D(num_neurons, 3, input_shape=(sequence_length, frame_length, 3, 1)))
+    # model.add(keras.layers.Flatten())
+    # model.add(keras.layers.Dropout(0.5))
+    # model.add(keras.layers.Dense(num_classes, activation='softmax'))
+
+    model.add(keras.layers.ConvLSTM2D(32, 2, activation='relu', return_sequences=True, input_shape=(sequence_length, frame_length, 3, 1)))
+    model.add(keras.layers.ConvLSTM2D(32, 2, activation='relu', return_sequences=True))
+    # model.add(keras.layers.MaxPooling2D(pool_size=(3, 1)))
+    model.add(keras.layers.ConvLSTM2D(16, kernel_size=(5, 1), activation='relu'))
     model.add(keras.layers.Flatten())
     model.add(keras.layers.Dropout(0.5))
     model.add(keras.layers.Dense(num_classes, activation='softmax'))
