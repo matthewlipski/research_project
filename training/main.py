@@ -7,17 +7,17 @@ from datasets import *
 from models import *
 
 if __name__ == '__main__':
-    DATA_SET_NAME: str = 'u_wave'
+    DATA_SET_NAME: str = 'initial'
     FRAME_SIZE: int = 20
     NUM_VALIDATION_FOLDS: int = 1
 
-    MODEL_NAME: str = 'conv_lstm_2d'
-    BATCH_SIZE: int = 32
-    NUM_EPOCHS: int = 200
+    MODEL_NAME: str = 'lstm'
+    BATCH_SIZE: int = 1
+    NUM_EPOCHS: int = 1
 
     data_set: DataSet = load_data_set[DATA_SET_NAME](FRAME_SIZE)
     data_set = normalize_data_set(data_set)
-    # data_set = flatten_data_set(data_set)
+    data_set = flatten_data_set(data_set)
 
     folded_data_set: List[Tuple[DataSet, DataSet]] = fold_data_set(data_set, NUM_VALIDATION_FOLDS)
     data_set_info = get_data_set_info(data_set)
@@ -29,7 +29,6 @@ if __name__ == '__main__':
         model: keras.models.Model = create_model[MODEL_NAME](data_set_info.num_features,
                                                              data_set_info.num_classes,
                                                              data_set_info.sequence_length,
-                                                             FRAME_SIZE,
                                                              32)
 
         x_training = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, folded_data_set[i][0])))
@@ -72,7 +71,7 @@ if __name__ == '__main__':
     model: keras.models.Model = create_model[MODEL_NAME](data_set_info.num_features,
                                                          data_set_info.num_classes,
                                                          data_set_info.sequence_length,
-                                                         64)
+                                                         32)
 
     x = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, data_set)))
     y = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, data_set)))
@@ -106,8 +105,8 @@ if __name__ == '__main__':
         tf.lite.OpsSet.SELECT_TF_OPS  # enable TensorFlow ops.
     ]
     # Default space & latency optimizations e.g. quantization
-    converter.optimizations = [tf.lite.Optimize.DEFAULT]
-    converter.representative_dataset = representative_dataset_generator
+    # converter.optimizations = [tf.lite.Optimize.DEFAULT]
+    # converter.representative_dataset = representative_dataset_generator
 
     tf_lite_model = converter.convert()
 
