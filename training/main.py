@@ -8,14 +8,16 @@ from models import *
 
 if __name__ == '__main__':
     DATA_SET_NAME: str = 'initial'
-    FRAME_SIZE: int = 20
-    NUM_VALIDATION_FOLDS: int = 10
+    FRAME_LENGTH: int = 20
 
     MODEL_NAME: str = 'rnn'
+    NUM_NEURONS: int = 32
+
     BATCH_SIZE: int = 32
     NUM_EPOCHS: int = 200
+    NUM_VALIDATION_FOLDS: int = 1
 
-    data_set: DataSet = load_data_set[DATA_SET_NAME](FRAME_SIZE)
+    data_set: DataSet = load_data_set(DATA_SET_NAME, FRAME_LENGTH)
     data_set = normalize_data_set(data_set)
     data_set = flatten_data_set(data_set)
 
@@ -26,24 +28,26 @@ if __name__ == '__main__':
     validation_accuracy: List[float] = []
 
     for i in range(len(folded_data_set)):
-        model: keras.models.Model = create_model[MODEL_NAME](data_set_info.num_features,
-                                                             data_set_info.num_classes,
-                                                             data_set_info.sequence_length,
-                                                             32)
+        model: keras.models.Model = create_model(MODEL_NAME,
+                                                 data_set_info.num_features,
+                                                 data_set_info.num_classes,
+                                                 data_set_info.sequence_length,
+                                                 data_set_info.frame_length,
+                                                 NUM_NEURONS)
 
+        # Splits training & validation data into features & classes for the current fold.
         x_training = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, folded_data_set[i][0])))
         y_training = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, folded_data_set[i][0])))
         x_validation = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, folded_data_set[i][1])))
         y_validation = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, folded_data_set[i][1])))
 
-        fold_number: int = i + 1
-
         print()
         print('################################################################################################')
-        print('Fold', fold_number, 'training commencing...')
+        print('Fold', i + 1, 'training commencing...')
         print('################################################################################################')
         print()
 
+        # Trains the model on the current fold and saves its training classification accuracy.
         fold_training_accuracy = model.fit(
             x_training,
             y_training,
@@ -55,10 +59,11 @@ if __name__ == '__main__':
 
         print()
         print('################################################################################################')
-        print('Fold', fold_number, 'validation commencing...')
+        print('Fold', i + 1, 'validation commencing...')
         print('################################################################################################')
         print()
 
+        # Validates the model on the current fold and saves its actual classification accuracy.
         fold_validation_accuracy: float = model.evaluate(x_validation, y_validation)[-1]
         validation_accuracy.append(fold_validation_accuracy)
 
@@ -68,14 +73,18 @@ if __name__ == '__main__':
     print('################################################################################################')
     print()
 
-    model: keras.models.Model = create_model[MODEL_NAME](data_set_info.num_features,
-                                                         data_set_info.num_classes,
-                                                         data_set_info.sequence_length,
-                                                         32)
+    model: keras.models.Model = create_model(MODEL_NAME,
+                                             data_set_info.num_features,
+                                             data_set_info.num_classes,
+                                             data_set_info.sequence_length,
+                                             data_set_info.frame_length,
+                                             NUM_NEURONS)
 
+    # Splits training data into features & classes for the full dataset.
     x = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, data_set)))
     y = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, data_set)))
 
+    # Trains the model on the full dataset.
     history = model.fit(
         x,
         y,
@@ -89,28 +98,27 @@ if __name__ == '__main__':
     print('################################################################################################')
     print()
 
-    # Save optimized model
-    def representative_dataset_generator() -> List[np.ndarray]:
-        # Generate values from a representative sample of the dataset
-        # In this case the sample is just the whole dataset
-        for time_sequence in x:
-            # Each scalar value must be inside a 2D array that is wrapped in a list
-            yield [np.array([time_sequence], dtype=np.float32)]
-
-
-    # Convert model to TensorFlow Lite
+    # Converts the model to TensorFlow Lite
     converter: tf.lite.TFLiteConverter = tf.lite.TFLiteConverter.from_keras_model(model)
     converter.target_spec.supported_ops = [
         tf.lite.OpsSet.TFLITE_BUILTINS,  # enable TensorFlow Lite ops.
         tf.lite.OpsSet.SELECT_TF_OPS  # enable TensorFlow ops.
     ]
-    # Default space & latency optimizations e.g. quantization
-    # converter.optimizations = [tf.lite.Optimize.DEFAULT]
-    # converter.representative_dataset = representative_dataset_generator
+
+    # Default space & latency optimizations e.g. quantization.
+    converter.optimizations = [tf.lite.Optimize.DEFAULT]
+
+    # Generator for data instances that are representative of the dataset, needed to optimize the converted model.
+    def representative_dataset_generator() -> List[np.ndarray]:
+        # In this case the data instances are actually just taken directly from the dataset.
+        for time_sequence in x:
+            # Funky list wrapping to correctly format the data for the TFLite converter.
+            yield [np.array([time_sequence], dtype=np.float32)]
+    converter.representative_dataset = representative_dataset_generator
 
     tf_lite_model = converter.convert()
 
-    # Save model to file
+    # Saves model to file
     file_name: str = \
         MODEL_NAME + '_' + \
         DATA_SET_NAME + '_' + \
@@ -122,7 +130,7 @@ if __name__ == '__main__':
 
     print()
     print('################################################################################################')
-    print('Validation results:')
+    print('Model Performance:')
     print('Mean training accuracy:', round(sum(training_accuracy) / len(training_accuracy), 2))
     print('Mean validation accuracy:', round(sum(validation_accuracy) / len(validation_accuracy), 2))
     print('################################################################################################')
