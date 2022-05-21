@@ -9,11 +9,11 @@ from models import *
 if __name__ == '__main__':
     DATA_SET_NAME: str = 'initial'
     FRAME_SIZE: int = 20
-    NUM_VALIDATION_FOLDS: int = 1
+    NUM_VALIDATION_FOLDS: int = 10
 
-    MODEL_NAME: str = 'lstm'
-    BATCH_SIZE: int = 1
-    NUM_EPOCHS: int = 1
+    MODEL_NAME: str = 'rnn'
+    BATCH_SIZE: int = 32
+    NUM_EPOCHS: int = 200
 
     data_set: DataSet = load_data_set[DATA_SET_NAME](FRAME_SIZE)
     data_set = normalize_data_set(data_set)
