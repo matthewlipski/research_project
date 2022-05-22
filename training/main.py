@@ -7,17 +7,18 @@ from datasets import *
 from models import *
 
 if __name__ == '__main__':
-    DATA_SET_NAME: str = 'initial'
+    DATA_SET_NAME: str = 'extended'
     FRAME_LENGTH: int = 20
 
-    MODEL_NAME: str = 'rnn'
+    MODEL_NAME: str = 'lstm'
     NUM_NEURONS: int = 32
 
     BATCH_SIZE: int = 32
-    NUM_EPOCHS: int = 200
+    NUM_EPOCHS: int = 1000
     NUM_VALIDATION_FOLDS: int = 1
 
     data_set: DataSet = load_data_set(DATA_SET_NAME, FRAME_LENGTH)
+    print(len(data_set))
     data_set = normalize_data_set(data_set)
     data_set = flatten_data_set(data_set)
 

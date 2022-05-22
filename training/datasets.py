@@ -25,14 +25,26 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
 
     data_set: DataSet = []
 
-    def initial():
-        data_set_path: str = './datasets/initial/'
+    def project():
+        data_set_path: str = './datasets/' + data_set_name + '/'
 
         class_indices = {
-            0: 'swipe_up/',
-            1: 'swipe_down/',
-            2: 'swipe_left/',
-            3: 'swipe_right/'
+            'initial': {
+                0: 'swipe_up/',
+                1: 'swipe_down/',
+                2: 'swipe_left/',
+                3: 'swipe_right/'
+            },
+            'extended': {
+                0: 'swipe_up/',
+                1: 'swipe_down/',
+                2: 'swipe_left/',
+                3: 'swipe_right/',
+                4: 'clockwise/',
+                5: 'counterclockwise/',
+                6: 'tap/',
+                7: 'double_tap/'
+            }
         }
 
         def load_pickle(file_path: str) -> List[List[List[int]]]:
@@ -44,7 +56,7 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                     except EOFError:
                         return data
 
-        def add_data(data: List[List[List[int]]], class_index: int):
+        def add_data(data: List[List[List[int]]], num_classes: int, class_index: int):
             for instance in data:
                 time_sequence: TimeSequence3D = []
                 time_frame: TimeFrame = []
@@ -62,18 +74,26 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                         time_sequence.append(time_frame)
                         time_frame = []
 
-                class_encoding: ClassEncoding = [0.0, 0.0, 0.0, 0.0]
+                class_encoding: ClassEncoding = [0.0] * num_classes
                 class_encoding[class_index] = 1.0
 
                 data_instance: DataInstance = DataInstance(time_sequence, class_encoding)
                 data_set.append(data_instance)
 
-        for i in range(len(class_indices)):
-            left_hand_class_data = load_pickle(data_set_path + class_indices[i] + 'left_hand/data.pickle')
-            add_data(left_hand_class_data, i)
+        for i in range(len(class_indices[data_set_name])):
+            left_hand_class_data = load_pickle(
+                data_set_path +
+                class_indices[data_set_name][i] +
+                'left_hand/data.pickle'
+            )
+            add_data(left_hand_class_data, len(class_indices[data_set_name]), i)
 
-            right_hand_class_data = load_pickle(data_set_path + class_indices[i] + 'right_hand/data.pickle')
-            add_data(right_hand_class_data, i)
+            right_hand_class_data = load_pickle(
+                data_set_path +
+                class_indices[data_set_name][i] +
+                'right_hand/data.pickle'
+            )
+            add_data(right_hand_class_data, len(class_indices[data_set_name]), i)
 
     def u_wave():
         def add_data_from_file(path: str):
@@ -106,7 +126,8 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
         add_data_from_file('./datasets/u_wave/UWaveGestureLibraryAll_TEST.arff')
 
     data_set_dict = {
-        'initial': initial,
+        'initial': project,
+        'extended': project,
         'u_wave': u_wave
     }
 
