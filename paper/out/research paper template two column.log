@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.4.6)  7 MAY 2022 23:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.4.5)  23 MAY 2022 14:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -393,48 +393,51 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \titlearea=\box54
 \actualheight=\skip56
- (sections/introduction.tex [1{C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pd
-ftex/pdftex.map}
+ (sections/introduction.tex
+Underfull \hbox (badness 1242) in paragraph at lines 29--31
+[]\OT1/ptm/m/n/10 The neu-ral net-work used to clas-sify hand ges-tures
+ []
+
+[1{C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 
 
-]
+])
+(sections/background.tex
+Underfull \hbox (badness 1226) in paragraph at lines 3--5
+\OT1/ptm/m/n/10 Machine learn-ing is a sub-field of ar-ti-fi-cial in-tel-li-gen
+ce
+ []
 
-LaTeX Warning: Citation `warden2020tinyml' on page 2 undefined on input line 66
-.
 
-
-LaTeX Warning: Citation `10.1145/3412449.3412551' on page 2 undefined on input 
-line 66.
+Underfull \hbox (badness 3872) in paragraph at lines 3--5
+\OT1/ptm/m/n/10 that hu-mans learn, grad-u-ally im-prov-ing its ac-cu-racy"
+ []
 
 )
 No file "research paper template two column".bbl.
-[2
-
-]
+[2]
 (C:/Users\matth\Downloads\research_project\paper\out\research paper template tw
 o column.aux)
 Package rerunfilecheck Info: File `"research paper template two column".out' ha
 s not changed.
-(rerunfilecheck)             Checksum: 9814C2D956916ADB9290ECA4E25C967A;103.
+(rerunfilecheck)             Checksum: 53EA2CB6BF5497D4B70B751A9E1EFE98;840.
  ) 
 Here is how much of TeX's memory you used:
- 10440 strings out of 478582
- 171573 string characters out of 2844345
- 468638 words of memory out of 3000000
- 28495 multiletter control sequences out of 15000+600000
- 478581 words of font info for 42 fonts, out of 8000000 for 9000
+ 10462 strings out of 478582
+ 172052 string characters out of 2844345
+ 467892 words of memory out of 3000000
+ 28507 multiletter control sequences out of 15000+600000
+ 480260 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,5n,63p,583b,325s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,5n,63p,583b,412s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:
-/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi1
-0.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8
-a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8
-a.pfb>
+/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:
+/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
 Output written on "C:/Users\matth\Downloads\research_project\paper\out\research
- paper template two column.pdf" (2 pages, 53691 bytes).
+ paper template two column.pdf" (2 pages, 49393 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 15 named destinations out of 1000 (max. 500000)
- 9 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 65 PDF objects out of 1000 (max. 8388607)
+ 22 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
