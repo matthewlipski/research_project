@@ -11,3 +11,5 @@ training/__pycache__/
 # Inference
 .pio
 inference/cmake-build-nano33ble/
+
+# Paper

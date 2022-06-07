@@ -1,25 +1,31 @@
 \section{Model Design}\label{sec:model-design}
-\subsection{Architectures Tested}\label{subsec:architectures-tested}
-Recognizing hand gestures based on photodiode data can be thought of as a time-series classification task, which is a type of problem that recurrent neural networks (RNNs) are especially well suited for.
+\subsection{Neural Network Architectures Tested}\label{subsec:architectures-tested}
+Recognizing hand gestures based on photodiode data can be thought of as a time-series classification task, which is a type of problem that recurrent neural networks (RNNs) are especially well suited for~\cite{HUSKEN2003223}.
 RNNs differ from conventional neural networks as they do not process the input in its entirety, but instead process each time step or sample from the input sequentially.
 Each time step is used to update a "hidden state", which is fed back into the RNN along with the next time step.
-This gives RNNs the ability to exploit the time-sensitive nature of time-series data, as each time step also has temporal data associated with it.
-This desirable property means that RNNs were the first type of network tested.
+This gives RNNs the ability to exploit the time-sensitive nature of time-series data, as each time step also has temporal information associated with it.
+Thanks to this desirable property, RNNs were the first type of neural network tested.
 
-Although RNNs are highly suitable for time-series classification, they suffer from the "vanishing gradient problem", which has already been overcome by long short-term memory cells (LSTMs) and gated recurrent units (GRUs).
+Although RNNs are highly suitable for time-series classification, they suffer from the "vanishing gradient problem", which has since been overcome by long short-term memory cells (LSTMs) and gated recurrent units (GRUs)~\cite{DBLP:journals/corr/abs-1801-06105}.
 To briefly explain this problem, the weight of the hidden state of a time step in an RNN tends to exponentially decrease for future time steps.
-This means that in practice, RNNs tend to ignore if earlier time steps are out of order, which limits performance for long data sequences (CITATION NEEDED).
-LSTMs and GRUs solve this issue using so-called "gates", which determine what contents of the previous hidden state should be kept and what contents of the current hidden state should be propagated to the next time step, which largely mitigates the vanishing gradient problem as only relevant information is kept, therefore greatly reducing the rate at which hidden state weights decay.
-Given that LSTMs and GRUs are should effectively guarantee better classification performance than RNNs due to their inherent advantages, these were also investigated.
+This means that in practice, RNNs tend to ignore if earlier time steps are out of order, which limits performance for long data sequences.
+LSTMs and GRUs solve this issue using so-called "gates", which determine which contents of the previous hidden state should be kept and which contents of the current hidden state should be propagated to the next time step.
+This largely mitigates the vanishing gradient problem as only relevant information is kept, therefore greatly reducing the rate at which hidden state weights decay.
+Given that LSTMs and GRUs are should yield better classification performance than RNNs due to this advantage, these were also investigated.
 
-One issue of using LSTMs and GRUs, however, is that they only accept a single data sequence with multiple channels as input.
-This is relevant as with 3D-formatted data, each time step is a 2D frame, which can't be used as input for these types of neural networks as they only expect a single value from each channel per time step, i.e.\ a 1D array.
-Therefore, each frame has to be flattened first, which removes some spacial data.
-This issue can be solved by using convolutional LSTMs, which use convolutional kernels in place of traditional neurons, treating each time step as an image, which is exactly how 2D frames should be processed.
+One issue of using LSTMs and GRUs, however, is that they only accept a single data sequence with multiple features as input, in which each time step contains a single value from each feature, i.e.\ a 1D array.
+This is relevant as with 3D-formatted data, each time step is a 2D frame - not a 1D array.
+Therefore, each frame has to be flattened first, which causes a loss of spacial \& temporal information.
+This issue can be solved by using convolutional LSTMs, which use convolutional kernels in place of traditional neurons~\cite{https://doi.org/10.48550/arxiv.1506.04214}, treating each time step as an image, which is exactly how 2D frames should be processed.
 Due to this, both 1D and 2D convolutional LSTMs were investigated for this paper, with the main difference being that the former performs 1D convolutions on each row of the frame individually, therefore keeping the data from each photodiode separate, while the latter performs 2D convolutions on the entire frame.
 
 Finally, transformer encoders were also tested for this project as a novel alternative to RNN based architectures.
-Transformers are typically used in language translation and are made up of two parts, an encoder and a decoder.
-The encoder converts the input into an internal representation, which can then be manipulated and decoded back into the the same data format as the input.
-However, by using only the encoder, the internal representation of the input can instead by directly mapped to a gesture, therefore making this architecture suitable for classification problems.
-Transformers also use a concept called self-attention which identifies which elements in a sequence carry most semantic value based on the other elements of the sequence, which is fundamentally different to the hidden state mechanism used by RNNs and their derivatives.
+Transformers use a concept called self-attention which identifies which elements in a sequence carry most semantic value based on the other elements of the sequence, which is fundamentally different to the hidden state mechanism used by RNNs and their derivatives.
+They are typically used in language translation and are made up of two parts, an encoder and a decoder.
+The encoder converts the input into an internal representation, which can then be manipulated and decoded into a more useful format.
+In a study by Y{\"u}ksel \textit{et al.}~\cite{yuksel-etal-2019-turkish}, a transformer encoder was used to classify topics from sequences of Turkish text taken from Twitter.
+Although this is clearly different to the goal presented in this paper, i.e.\ classifying gestures based on photodiode readings, both are classification tasks using input data in which order is important.
+Given the positive results found in this study, it seemed reasonable to test transformer encoders for gesture recognition as well.
+
+\subsection{Parameter Tuning}\label{subsec:frame-size}
+TODO

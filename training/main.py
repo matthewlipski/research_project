@@ -1,7 +1,9 @@
+import os
 from datetime import datetime
 from typing import IO
 
 import tensorflow as tf
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from datasets import *
 from models import *
@@ -10,12 +12,30 @@ if __name__ == '__main__':
     DATA_SET_NAME: str = 'extended'
     FRAME_LENGTH: int = 20
 
-    MODEL_NAME: str = 'lstm'
+    MODEL_NAME: str = 'rnn'
     NUM_NEURONS: int = 32
 
     BATCH_SIZE: int = 32
-    NUM_EPOCHS: int = 1000
+    NUM_EPOCHS: int = 1000000
     NUM_VALIDATION_FOLDS: int = 1
+
+    # Callback to stop training when loss stop decreasing.
+    TRAINING_PATIENCE: int = 200
+    early_stop_cb = EarlyStopping(
+        monitor='loss',
+        mode='min',
+        patience=TRAINING_PATIENCE,
+    )
+
+    # Callback to save model weights at training epoch with minimum loss.
+    CHECKPOINT_FILE_NAME: str = 'temp'
+    checkpoint_cb = ModelCheckpoint(
+        filepath=CHECKPOINT_FILE_NAME,
+        monitor='loss',
+        mode='min',
+        save_weights_only=True,
+        save_best_only=True
+    )
 
     data_set: DataSet = load_data_set(DATA_SET_NAME, FRAME_LENGTH)
     print(len(data_set))
@@ -49,14 +69,24 @@ if __name__ == '__main__':
         print()
 
         # Trains the model on the current fold and saves its training classification accuracy.
-        fold_training_accuracy = model.fit(
+        fold_training_history = model.fit(
             x_training,
             y_training,
             epochs=NUM_EPOCHS,
             batch_size=BATCH_SIZE,
-            validation_data=(x_validation, y_validation)
-        ).history['categorical_accuracy'][-1]
+            validation_data=(x_validation, y_validation),
+            callbacks=[early_stop_cb, checkpoint_cb]
+        ).history
+
+        # Finds training accuracy at epoch with minimum loss.
+        fold_min_loss_epoch: int = np.argmin(fold_training_history['loss'])
+        fold_training_accuracy: float = fold_training_history['categorical_accuracy'][fold_min_loss_epoch]
         training_accuracy.append(fold_training_accuracy)
+
+        # Loads model weights with minimum loss and removes the file.
+        model.load_weights(CHECKPOINT_FILE_NAME)
+        os.remove(CHECKPOINT_FILE_NAME + '.index')
+        os.remove(CHECKPOINT_FILE_NAME + '.data-00000-of-00001')
 
         print()
         print('################################################################################################')
@@ -85,17 +115,30 @@ if __name__ == '__main__':
     x = np.asarray(list(map(lambda data_instance: data_instance.time_sequence, data_set)))
     y = np.asarray(list(map(lambda data_instance: data_instance.class_encoding, data_set)))
 
+    # Model file name formatting.
+    file_name: str = \
+        MODEL_NAME + '_' + \
+        DATA_SET_NAME + '_' + \
+        str(round(sum(validation_accuracy) / len(validation_accuracy), 2)) + '_' + \
+        datetime.now().strftime('%m-%d-%Y_%H-%M-%S')
+
     # Trains the model on the full dataset.
     history = model.fit(
         x,
         y,
         epochs=NUM_EPOCHS,
         batch_size=BATCH_SIZE,
+        callbacks=[early_stop_cb, checkpoint_cb]
     )
+
+    # Loads model weights with minimum loss and removes the file.
+    model.load_weights(CHECKPOINT_FILE_NAME)
+    os.remove(CHECKPOINT_FILE_NAME + '.index')
+    os.remove(CHECKPOINT_FILE_NAME + '.data-00000-of-00001')
 
     print()
     print('################################################################################################')
-    print('Training complete. Saving model to file...')
+    print('Training complete. Converting model to TFLite...')
     print('################################################################################################')
     print()
 
@@ -120,11 +163,6 @@ if __name__ == '__main__':
     tf_lite_model = converter.convert()
 
     # Saves model to file
-    file_name: str = \
-        MODEL_NAME + '_' + \
-        DATA_SET_NAME + '_' + \
-        str(round(sum(validation_accuracy) / len(validation_accuracy), 2)) + '_' + \
-        datetime.now().strftime('%m-%d-%Y_%H-%M-%S') + '.tflite'
     model_file: IO = open('./models/' + file_name, 'wb')
     model_file.write(tf_lite_model)
     model_file.close()

@@ -2,7 +2,7 @@
 \setlength{\parindent}{0pt}%
 
 \section{Introduction}\label{sec:introduction}
-\subsection{Motivation}\label{subsec:motivation}
+\subsection{Research Overview}\label{subsec:research-overview}
 Traditionally, physical buttons have been by far the most common way for users to interact with electronic devices in public settings, whether these are coffee machines, elevator panels, or train ticket machines.
 However, the concern of disease transmission has become increasingly prevalent in recent years due to the COVID-19 pandemic, making it enticing to develop an alternative solution which does not require touch.
 One such solution is the use of hand gestures to interact with public devices instead.
@@ -10,54 +10,41 @@ By performing hand motions such as swiping and tapping, users can effectively an
 
 However, there are a few key challenges to this approach which stand in the way of it replacing physical buttons in real-world applications.
 \begin{enumerate}
-    \item Additional hardware is needed to detect hand gestures, as a microcontroller on its own has no way of knowing the positions of a user's hand while performing a gesture.
-    \item Additional software must be implemented to recognize gestures.
-    While buttons are just simple digital inputs, the same gesture can be performed somewhat differently across different users, yet the system must be able to accurately classify it regardless.
+    \item Additional hardware is needed to detect the positions of a user's hand while performing a gesture.
+    \item Additional software must be implemented to recognize gestures based on hand position over time.
+    While buttons are just simple digital inputs, one gesture can also be performed differently between different users, yet the system must be able to accurately classify it regardless.
     \item Gesture recognition must be done in real-time.
-    Since the process of recognizing which gesture is being performed is quite complex, the latency introduced by this could be significant.
-    However, the user should not feel any perceptible lag while using the system for a positive experience.
+    Since the process of classifying gestures can be quite complex, the latency introduced by this may be significant.
+    However, the user should not perceive any lag while using the system for a positive experience.
 \end{enumerate}
 
-This research attempts to overcome these issues to create a gesture recognition system that runs on an Arduino Nano 33 BLE microcontroller.
-In this system, OPT101 photodiodes are used to detect the position of the user's hand at various points in time, while a machine learning model was trained to recognize which gesture is being performed.
-A more detailed description of the system pipeline can be found in section X\@.
-Similar research which involves using photodiodes and machine learning to recognize hand gestures has already been conducted, but this project improves on existing solutions in a number of ways:
+This research overcomes these challenges by using data from OPT101 photodiodes, which is fed into a neural network to recognize gestures with high accuracy and low latency on an Arduino Nano 33 BLE microcontroller.
+It is also part of a larger project which integrates this neural network into a full gesture recognition system, which is elaborated on in section 3.2.
+
+Similar research which involves using photodiodes and machine learning to recognize hand gestures has already been conducted, but this paper improves on existing solutions in a number of ways:
 \begin{enumerate}
     \item The microcontroller used has less processing power (CITATION NEEDED), making it more representative of the hardware used in real-world applications.
     \item The number of photodiodes needed is much lower (CITATION NEEDED), requiring only 3 while most existing solutions use an array of at least 8.
     \item The data from photodiodes is 3D-formatted, which better preserves temporal information and is more suitable for classifying sequences.
-    An explanation for what 3D-formatting involves can be found in section X\@.
+    An explanation for what 3D-formatting involves can be found in section 4.1\@.
     \item The neural network used to classify hand gestures uses fewer layers than competing solutions (CITATION NEEDED) while maintaining a high level of accuracy and reducing system latency.
-    More information regarding the neural networks tested can be found in section X\@.
+    More information regarding the neural networks tested can be found in section 3.1\@.
 \end{enumerate}
 
 \subsection{Research Question}\label{subsec:research-question}
-Given the challenges overcome and contributions to the field made, the goal of this project can be summarized with the following research question:
+Given the challenges overcome and contributions to the field made, the goal of this paper can be summarized with the following research question:
 
-\textbf{"Which machine learning model yields the lowest error rate for real-time gesture recognition on an Arduino Nano 33 BLE, using 3D-formatted data from photodiodes?"}
+\textbf{"Which neural network architecture is most appropriate for recognizing hand gestures on an Arduino Nano 33 BLE, using 3D-formatted data from OPT101 photodiodes?"}
 
-This question can then be segmented into the following sub-questions:
+This can then be segmented into the following sub-questions:
 \begin{enumerate}
-    \item What does "3D-formatting" mean in the context of photo diode data?
-    \item What does "error rate" mean in the context of machine learning models?
-    \item What does "real-time" mean in the context of gesture recognition?
-    \item How can we ensure that a given machine learning model will run in real-time on an Arduino Nano 33 BLE?
-    \item How can we determine which machine learning model yields the lowest error rate for gesture recognition?
-    \item How can we pre-process the 3D-formatted photodiode data to minimize machine learning model error rate in the context of gesture recognition?
-    \item Why it be useful for embedded devices to be able to process data using machine learning models?
+    \item Which neural network architectures produce the highest accuracy for hand gesture recognition?
+    \item Which neural network architectures produce the lowest latency for hand gesture recognition?
+    \item What is the minimum acceptable accuracy for recognizing hand gestures on an Arduino Nano 33 BLE?
+    \item What is the maximum acceptable latency for recognizing hand gestures on an Arduino Nano 33 BLE?
+    \item How can 3D-formatting data be exploited for better gesture recognition performance?
 \end{enumerate}
 
-%The first of these sub-questions can be answered immediately as "3D-formatting" is a term specific to this paper, and is best explained with the comparison to "2D-formatting".
-%2D-formatted data can simply be thought of as an image, with some horizontal resolution $x$ and vertical resolution $y$.
-%In the context of this project, the data we are concerned with is the readings from our photo diodes over some period of time during which the gesture is performed.
-%This means that we can format said data as a 2D image in which $x$ is the number of photo diodes we use and $y$ is the number of samples we receive from the photo diodes in the aforementioned period of time, while the value of each "pixel" in the image is a reading from a single photo diode at a single point in time.
-%3D-formatted data can meanwhile be thought of as a video, which splits this 2D-image into a sequence of $n$ frames.
-%3D-formatting is generally more appropriate when the data is sensitive to time, i.e.\ when data points should be considered in a specific sequence.
-%Therefore, by 3D-formatting the photo diode data, lower error rates should be achievable as the temporal information from the photo diodes isn't lost.
-%
-%The remaining sub-questions will be answered in later sections of this paper, while the research question as a whole will be answered in the final section, using conclusions drawn from each individual sub-question.
-%
 %The planned use case for this technology is hands-free navigation of menus which has especially gained relevance due to the restrictions imposed during the COVID-19 pandemic, which has showed that gestures can be an appealing alternative to physical buttons in social settings.
 %The most important existing literature for this research comes from Pete Warden and Daniel Situnayake, who are pioneers in the field of embedded AI and authors of the book "TinyML: Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers"\cite{warden2020tinyml}, as well as Qing Wang and Marco Zuniga, who have laid the groundwork for embedded AI specifically in the context of hand gesture recognition\cite{10.1145/3412449.3412551}.
-%However, there is still room for advancement regarding gesture recognition in particular - error rates, required processing power, and sensor counts, are all likely to be reduced due to this field being so new.
 %The research conducted for this paper expands on existing work in this exact way, by using a lower power microcontroller and significantly fewer photo diodes than in the solution created by Wang and Zuniga, while maintaining or improving the classification accuracy of hand gestures.

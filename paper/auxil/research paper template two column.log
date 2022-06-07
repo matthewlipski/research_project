@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.4.5)  30 MAY 2022 22:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.6)  6 JUN 2022 23:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -305,7 +305,7 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisrulewidth=\dimen177
 )
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 3
-5.
+4.
 
 (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -315,30 +315,28 @@ tex.def
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count287
 \l__pdf_internal_box=\box52
-)
-(C:/Users\matth\Downloads\research_project\paper\out\research paper template tw
-o column.aux)
+) (research paper template two column.aux)
 \openout1 = `"research paper template two column.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-Package hyperref Info: Link coloring OFF on input line 35.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+Package hyperref Info: Link coloring OFF on input line 34.
 
 (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -352,14 +350,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count288
 )
-LaTeX Info: Redefining \ref on input line 35.
-LaTeX Info: Redefining \pageref on input line 35.
-LaTeX Info: Redefining \nameref on input line 35.
-
-(C:/Users\matth\Downloads\research_project\paper\out\research paper template tw
-o column.out)
-(C:/Users\matth\Downloads\research_project\paper\out\research paper template tw
-o column.out)
+LaTeX Info: Redefining \ref on input line 34.
+LaTeX Info: Redefining \pageref on input line 34.
+LaTeX Info: Redefining \nameref on input line 34.
+ (research paper template two column.out)
+(research paper template two column.out)
 \@outlinefile=\write3
 \openout3 = `"research paper template two column.out"'.
 
@@ -393,7 +388,8 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \titlearea=\box54
 \actualheight=\skip56
- (sections/introduction.tex
+ (sections/abstract.tex) (sections/acknowledgements.tex)
+(sections/introduction.tex
 Underfull \hbox (badness 1242) in paragraph at lines 30--32
 []\OT1/ptm/m/n/10 The neu-ral net-work used to clas-sify hand ges-tures
  []
@@ -403,43 +399,56 @@ Underfull \hbox (badness 1242) in paragraph at lines 30--32
 
 
 ])
-(sections/background.tex
-Underfull \hbox (badness 1226) in paragraph at lines 3--5
-\OT1/ptm/m/n/10 Machine learn-ing is a sub-field of ar-ti-fi-cial in-tel-li-gen
-ce
+(sections/background.tex) (sections/system_overview.tex
+<figures/3d_data.png, id=115, 880.03781pt x 255.95625pt>
+File: figures/3d_data.png Graphic file (type png)
+<use figures/3d_data.png>
+Package pdftex.def Info: figures/3d_data.png  used on input line 16.
+(pdftex.def)             Requested size: 243.91125pt x 70.94081pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2]) (sections/model_design.tex) (sections/model_implementation.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3 <./figures/3d_data.png>]) (sections/results.tex) (sections/related_work.tex
+)
+(sections/responsible_research.tex) (sections/conclusion.tex)
+(research paper template two column.bbl
+Underfull \hbox (badness 6592) in paragraph at lines 20--26
+[]\OT1/ptm/m/n/10 Robert David, Jared Duke, Ad-vait Jain, Vi-jay
  []
 
 
-Underfull \hbox (badness 3872) in paragraph at lines 3--5
-\OT1/ptm/m/n/10 that hu-mans learn, grad-u-ally im-prov-ing its ac-cu-racy"
+Underfull \hbox (badness 1264) in paragraph at lines 80--86
+[]\OT1/ptm/m/n/10 At^^Pf Emre Y[]uksel, Ya[]ar Alim T[]urkmen, Arzu-can
  []
 
-) (sections/system_overview.tex [2]) (sections/model_design.tex)
-No file "research paper template two column".bbl.
-[3]
-(C:/Users\matth\Downloads\research_project\paper\out\research paper template tw
-o column.aux)
+) [4] (research paper template two column.aux)
 Package rerunfilecheck Info: File `"research paper template two column".out' ha
 s not changed.
-(rerunfilecheck)             Checksum: 53EA2CB6BF5497D4B70B751A9E1EFE98;840.
+(rerunfilecheck)             Checksum: 2B3F129658927E69B53CA184F93D739A;845.
  ) 
 Here is how much of TeX's memory you used:
- 10489 strings out of 478582
- 172658 string characters out of 2844345
- 467882 words of memory out of 3000000
- 28514 multiletter control sequences out of 15000+600000
- 480714 words of font info for 45 fonts, out of 8000000 for 9000
+ 10637 strings out of 478582
+ 175902 string characters out of 2844345
+ 468263 words of memory out of 3000000
+ 28609 multiletter control sequences out of 15000+600000
+ 483983 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,5n,63p,583b,412s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,6n,63p,583b,410s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:
 /Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi1
-0.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8
-a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8
-a.pfb>
+0.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmr10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
+es/utmb8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
+es/utmr8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
+es/utmri8a.pfb>
 Output written on "C:/Users\matth\Downloads\research_project\paper\out\research
- paper template two column.pdf" (3 pages, 66241 bytes).
+ paper template two column.pdf" (4 pages, 123040 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 201 PDF objects out of 1000 (max. 8388607)
+ 59 named destinations out of 1000 (max. 500000)
+ 182 words of extra memory for PDF output out of 10000 (max. 10000000)
 
