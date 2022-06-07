@@ -13,3 +13,4 @@ training/__pycache__/
 inference/cmake-build-nano33ble/
 
 # Paper
+.DS_Store
