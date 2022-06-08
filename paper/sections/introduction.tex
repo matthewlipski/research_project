@@ -11,6 +11,7 @@ By performing hand motions such as swiping and tapping, users can effectively an
 However, there are a few key challenges to this approach which stand in the way of it replacing physical buttons in real-world applications.
 \begin{enumerate}
     \item Additional hardware is needed to detect the positions of a user's hand while performing a gesture.
+    The data output by this hardware is likely to be low in resolution since system costs should be minimized.
     \item Additional software must be implemented to recognize gestures based on hand position over time.
     While buttons are just simple digital inputs, one gesture can also be performed differently between different users, yet the system must be able to accurately classify it regardless.
     \item Gesture recognition must be done in real-time.
@@ -23,12 +24,10 @@ It is also part of a larger project which integrates this neural network into a 
 
 Similar research which involves using photodiodes and machine learning to recognize hand gestures has already been conducted, but this paper improves on existing solutions in a number of ways:
 \begin{enumerate}
-    \item The microcontroller used has less processing power (CITATION NEEDED), making it more representative of the hardware used in real-world applications.
-    \item The number of photodiodes needed is much lower (CITATION NEEDED), requiring only 3 while most existing solutions use an array of at least 8.
-    \item The data from photodiodes is 3D-formatted, which better preserves temporal information and is more suitable for classifying sequences.
+    \item A high level of accuracy is maintained with fewer photodiodes, and therefore fewer input features, than existing solutions (CITATION NEEDED).
+    \item The data from photodiodes is 3D-formatted, which better preserves temporal information and improves recognition accuracy.
     An explanation for what 3D-formatting involves can be found in section 4.1\@.
-    \item The neural network used to classify hand gestures uses fewer layers than competing solutions (CITATION NEEDED) while maintaining a high level of accuracy and reducing system latency.
-    More information regarding the neural networks tested can be found in section 3.1\@.
+    \item The neural network used to classify hand gestures is shallower than competing solutions (CITATION NEEDED), leading to reduced system latency while maintaining a high level of accuracy.
 \end{enumerate}
 
 \subsection{Research Question}\label{subsec:research-question}

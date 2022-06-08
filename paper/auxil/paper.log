@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.6)  7 JUN 2022 00:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.4.5)  7 JUN 2022 16:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -389,8 +389,13 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 \actualheight=\skip56
  (sections/abstract.tex) (sections/acknowledgements.tex)
 (sections/introduction.tex
-Underfull \hbox (badness 1242) in paragraph at lines 30--32
+Underfull \hbox (badness 1242) in paragraph at lines 30--31
 []\OT1/ptm/m/n/10 The neu-ral net-work used to clas-sify hand ges-tures
+ []
+
+
+Underfull \hbox (badness 2538) in paragraph at lines 30--31
+\OT1/ptm/m/n/10 is shal-lower than com-pet-ing so-lu-tions (CI-TA-TION
  []
 
 [1{C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
@@ -413,7 +418,7 @@ Package pdftex.def Info: figures/3d_data.png  used on input line 17.
 <figures/system.png, id=136, 749.04843pt x 499.8675pt>
 File: figures/system.png Graphic file (type png)
 <use figures/system.png>
-Package pdftex.def Info: figures/system.png  used on input line 40.
+Package pdftex.def Info: figures/system.png  used on input line 42.
 (pdftex.def)             Requested size: 243.91125pt x 162.76773pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -435,16 +440,16 @@ Underfull \hbox (badness 1264) in paragraph at lines 75--81
 
 ] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 2AF1E0C6971BC55F04CD5CB318BF7784;3182.
+(rerunfilecheck)             Checksum: B6DEDDE44D3ED191DE82A78794C318AF;3629.
  ) 
 Here is how much of TeX's memory you used:
- 10659 strings out of 478582
- 175585 string characters out of 2844345
- 468369 words of memory out of 3000000
+ 10658 strings out of 478582
+ 175578 string characters out of 2844345
+ 469466 words of memory out of 3000000
  28627 multiletter control sequences out of 15000+600000
  483983 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,6n,63p,552b,442s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,6n,63p,552b,441s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:
 /Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi1
 0.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
@@ -453,9 +458,9 @@ es/utmb8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
 es/utmr8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
 es/utmri8a.pfb>
 Output written on C:/Users\matth\Downloads\research_project\paper\out\paper.pdf
- (5 pages, 283012 bytes).
+ (5 pages, 283465 bytes).
 PDF statistics:
- 211 PDF objects out of 1000 (max. 8388607)
- 61 named destinations out of 1000 (max. 500000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
