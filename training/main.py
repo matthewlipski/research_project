@@ -9,10 +9,10 @@ from datasets import *
 from models import *
 
 if __name__ == '__main__':
-    DATA_SET_NAME: str = 'extended'
+    DATA_SET_NAME: str = 'final'
     FRAME_LENGTH: int = 20
 
-    MODEL_NAME: str = 'rnn'
+    MODEL_NAME: str = 'lstm'
     NUM_NEURONS: int = 32
 
     BATCH_SIZE: int = 32
@@ -38,8 +38,8 @@ if __name__ == '__main__':
     )
 
     data_set: DataSet = load_data_set(DATA_SET_NAME, FRAME_LENGTH)
-    print(len(data_set))
     data_set = normalize_data_set(data_set)
+    plot_example_data(data_set)
     data_set = flatten_data_set(data_set)
 
     folded_data_set: List[Tuple[DataSet, DataSet]] = fold_data_set(data_set, NUM_VALIDATION_FOLDS)

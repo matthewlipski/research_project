@@ -24,11 +24,13 @@ It is also part of a larger project which integrates this neural network into a 
 
 Similar research which involves using photodiodes and machine learning to recognize hand gestures has already been conducted, but this paper improves on existing solutions in a number of ways:
 \begin{enumerate}
-    \item A high level of accuracy is maintained with fewer photodiodes, and therefore fewer input features, than existing solutions (CITATION NEEDED).
+    \item A high level of accuracy is maintained with fewer photodiodes, and therefore fewer model input features, than existing solutions.
     \item The data from photodiodes is 3D-formatted, which better preserves temporal information and improves recognition accuracy.
-    An explanation for what 3D-formatting involves can be found in section 4.1\@.
-    \item The neural network used to classify hand gestures is shallower than competing solutions (CITATION NEEDED), leading to reduced system latency while maintaining a high level of accuracy.
+    An explanation for what 3D-formatting involves can be found in section~\ref{subsec:3d-formatted-data}.
+    \item The neural network used to classify hand gestures is shallower than competing solutions, leading to reduced system latency while maintaining a high level of accuracy.
 \end{enumerate}
+
+A discussion regarding existing research in this field is found in section~\ref{sec:related-work}, which provides more context to these improvements.
 
 \subsection{Research Question}\label{subsec:research-question}
 Given the challenges overcome and contributions to the field made, the goal of this paper can be summarized with the following research question:

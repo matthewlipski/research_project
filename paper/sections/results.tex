@@ -1,1 +1,25 @@
 \section{Results}\label{sec:results}
+\subsection{Testing Methodology}\label{subsec:testing-methodology}
+\subsubsection{Accuracy Testing Methodology}
+To ensure that the measured validation accuracy for a given architecture was as high as possible, as well as being representative of real world performance, four distinct measures were put in place.
+The first of these was the addition of a dropout layer with $p=0.5$ before the output layer, to ensure that overfitting would not be an issue~\cite{JMLR:v15:srivastava14a}.
+The second measure was the use of k-fold cross-validation~\cite{inbook} with $k=10$, as validation accuracy can be skewed based on how the test and validation sets are split.
+Thirdly, each model architecture was trained until the value of the loss function did not improve after 200 consecutive epochs.
+Once training was complete, the model weights were also reverted to the epoch after which the loss function value was lowest.
+This removes the variance caused by randomizing initial model weights as well as differences in model training time, and allows each model to achieve close to its maximum possible performance.
+Finally, the dataset was shuffled randomly before each model was validated as ordered data can cause anomalies with training and k-fold cross-validation.
+
+\subsubsection{Latency Testing Methodology}
+
+\subsection{Testing Results}\label{subsec:testing-results}
+\subsubsection{RNN}
+
+\subsubsection{LSTM}
+
+\subsubsection{GRU}
+
+\subsubsection{1D Convolutional LSTM}
+
+\subsubsection{2D Convolutional LSTM}
+
+\subsubsection{Transformer Encoder}

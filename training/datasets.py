@@ -1,3 +1,4 @@
+import os
 import pickle
 import random
 
@@ -44,6 +45,18 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                 5: 'counterclockwise/',
                 6: 'tap/',
                 7: 'double_tap/'
+            },
+            'final': {
+                0: 'swipe_up/',
+                1: 'swipe_down/',
+                2: 'swipe_left/',
+                3: 'swipe_right/',
+                4: 'clockwise/',
+                5: 'counterclockwise/',
+                6: 'tap/',
+                7: 'double_tap/',
+                # 8: 'zoom_in/',
+                # 9: 'zoom_out/'
             }
         }
 
@@ -61,7 +74,7 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                 time_sequence: TimeSequence3D = []
                 time_frame: TimeFrame = []
 
-                for step_num in range(100):
+                for step_num in range(len(instance)):
                     time_step: TimeStep = [
                         float(instance[step_num][0]),
                         float(instance[step_num][1]),
@@ -77,23 +90,33 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                 class_encoding: ClassEncoding = [0.0] * num_classes
                 class_encoding[class_index] = 1.0
 
-                data_instance: DataInstance = DataInstance(time_sequence, class_encoding)
+                data_instance: DataInstance = DataInstance(time_sequence[::5], class_encoding)
                 data_set.append(data_instance)
 
         for i in range(len(class_indices[data_set_name])):
-            left_hand_class_data = load_pickle(
-                data_set_path +
-                class_indices[data_set_name][i] +
-                'left_hand/data.pickle'
-            )
-            add_data(left_hand_class_data, len(class_indices[data_set_name]), i)
+            # for file_name in os.listdir(data_set_path + class_indices[data_set_name][i] + 'left_hand/'):
+            for j in range(30, 49):
+                if j != 5 and j != 6:
+                    left_hand_class_data = load_pickle(
+                        data_set_path +
+                        class_indices[data_set_name][i] +
+                        'left_hand/' +
+                        'candidate_' + str(j) + '.pickle'
+                        # file_name
+                    )
+                    add_data(left_hand_class_data, len(class_indices[data_set_name]), i)
 
-            right_hand_class_data = load_pickle(
-                data_set_path +
-                class_indices[data_set_name][i] +
-                'right_hand/data.pickle'
-            )
-            add_data(right_hand_class_data, len(class_indices[data_set_name]), i)
+            # for file_name in os.listdir(data_set_path + class_indices[data_set_name][i] + 'right_hand/'):
+            for j in range(30, 49):
+                if j != 5 and j != 6:
+                    right_hand_class_data = load_pickle(
+                        data_set_path +
+                        class_indices[data_set_name][i] +
+                        'right_hand/' +
+                        'candidate_' + str(j) + '.pickle'
+                        # file_name
+                    )
+                    add_data(right_hand_class_data, len(class_indices[data_set_name]), i)
 
     def u_wave():
         def add_data_from_file(path: str):
@@ -128,6 +151,7 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
     data_set_dict = {
         'initial': project,
         'extended': project,
+        'final': project,
         'u_wave': u_wave
     }
 

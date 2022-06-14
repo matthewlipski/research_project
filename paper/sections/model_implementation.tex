@@ -1,17 +1,9 @@
-\section{Model Implementation MOVE TO RESULTS}\label{sec:model-implementation}
-\subsection{Accuracy Testing}\label{subsec:validation-accuracy-testing}
-To ensure that the measured validation accuracy for a given architecture was as high as possible, as well as being representative of real world performance, four distinct measures were put in place.
-The first of these was the addition of a dropout layer with $p=0.5$, before the output layer, to ensure that overfitting would not be an issue~\cite{JMLR:v15:srivastava14a}.
-The second measure was%CFR$ S the use of k-fold cross-validation~\cite{inbook} with $k=10$, as validation accuracy can be skewed based on how the test and validation sets are split.
-Thirdly, each model architecture was trained until the value of the loss function did not improve after 200 consecutive epochs.
-Once training was complete, the model weights were also reverted to the epoch after which the loss function value was lowest.
-This removes the variance caused by randomizing initial model weights as well as differences in model training time, and allows each model to achieve close to its maximum possible performance.
-Finally, the dataset was shuffled randomly before each model was validated as ordered data can cause anomalies with training and k-fold cross-validation.
+\section{Model Implementation}\label{sec:model-implementation}
+\subsection{Training Code}\label{subsec:training-code}
+The implementation and testing of each neural network architecture was done using the TensorFlow Python library and high-level Keras API\@.
+While the dataset is split into training and validation sets when evaluating architecture performance, the final models used on the Arduino are trained on all available data, after which they are converted into TensorFlow Lite models.
 
-\subsection{Latency Testing MOVE TO RESULTS}\label{subsec:latency-testing}
-TODO
-
-\subsection{Codebase SPLIT INTO TRAINING AND INFERENCE}\label{subsec:testing-framework}
-The implementation and testing of each model architecture was done using the TensorFlow Python library and high-level Keras API\@.
-The models were converted to TensorFlow Lite and C to be used for inference on an Arduino Nano 33 BLE as detailed in chapter 4.5 of "TinyML Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers"~\cite{warden2020tinyml}.
-All code used for this research can be found at https://github.com/matthewlipski/research\_project PUT IN RESPONSIBLE RESEARCH.
+\subsection{Inference Code}\label{subsec:inference-code}
+To run the TensorFlow Lite models created during training on an Arduino, they must first be converted into C files.
+This was done using the method detailed in chapter 4.5 of "TinyML Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers"~\cite{warden2020tinyml}.
+TODO: ADD SPECIFICS REGARDING FINAL IMPLEMENTATION ON ARDUINO.
