@@ -1,5 +1,6 @@
 import keras.layers
 import keras.models
+import tensorflow as tf
 
 
 def create_model(model_type: str,
@@ -30,6 +31,10 @@ def create_model(model_type: str,
         model.add(keras.layers.GRU(num_neurons, input_shape=(sequence_length, num_features)))
 
     def lstm():
+        model.add(keras.layers.LSTM(num_neurons, return_sequences=True, input_shape=(sequence_length, num_features)))
+        model.add(keras.layers.Dropout(0.5))
+        model.add(keras.layers.LSTM(num_neurons, return_sequences=True, input_shape=(sequence_length, num_features)))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.LSTM(num_neurons, input_shape=(sequence_length, num_features)))
 
     def conv_1d():

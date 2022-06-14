@@ -1,4 +1,3 @@
-import os
 import pickle
 import random
 
@@ -8,13 +7,11 @@ from scipy.io import arff
 from data_processing import *
 
 
-def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
+def load_data_set(data_set_name: str) -> DataSet:
     """
     Creates a DataSet object by reading & processing files of a chosen dataset.
 
     :param data_set_name: The name of the dataset to load. Possible options can be found in data_set_dict.
-    :param frame_length: The number of time steps to include in a frame. Each 2D data sequence is split into frames in
-        order to convert it into a 3D format.
 
     :return: A DataSet object representing the chosen dataset.
     """
@@ -27,7 +24,7 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
     data_set: DataSet = []
 
     def project():
-        data_set_path: str = './datasets/' + data_set_name + '/'
+        data_set_path: str = './datasets/' + 'final' + '/'
 
         class_indices = {
             'initial': {
@@ -55,9 +52,9 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                 5: 'counterclockwise/',
                 6: 'tap/',
                 7: 'double_tap/',
-                # 8: 'zoom_in/',
-                # 9: 'zoom_out/'
-            }
+                8: 'zoom_in/',
+                9: 'zoom_out/'
+            },
         }
 
         def load_pickle(file_path: str) -> List[List[List[int]]]:
@@ -71,8 +68,7 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
 
         def add_data(data: List[List[List[int]]], num_classes: int, class_index: int):
             for instance in data:
-                time_sequence: TimeSequence3D = []
-                time_frame: TimeFrame = []
+                time_sequence: TimeSequence2D = []
 
                 for step_num in range(len(instance)):
                     time_step: TimeStep = [
@@ -81,17 +77,12 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                         float(instance[step_num][2])
                     ]
 
-                    time_frame.append(time_step)
-
-                    if (step_num + 1) % frame_length == 0:
-                        time_sequence.append(time_frame)
-                        time_frame = []
+                    time_sequence.append(time_step)
 
                 class_encoding: ClassEncoding = [0.0] * num_classes
                 class_encoding[class_index] = 1.0
 
-                data_instance: DataInstance = DataInstance(time_sequence[::5], class_encoding)
-                data_set.append(data_instance)
+                data_set.append(DataInstance(time_sequence[::5], class_encoding))
 
         for i in range(len(class_indices[data_set_name])):
             # for file_name in os.listdir(data_set_path + class_indices[data_set_name][i] + 'left_hand/'):
@@ -124,8 +115,7 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
             df = pd.DataFrame(arff_data[0])
 
             for index, row in df.iterrows():
-                time_sequence: TimeSequence3D = []
-                time_frame: TimeFrame = []
+                time_sequence: TimeSequence2D = []
 
                 for time_step_num in range(1, 316):
                     time_step: TimeStep = [
@@ -133,11 +123,7 @@ def load_data_set(data_set_name: str, frame_length: int = 1) -> DataSet:
                         row['att' + str(315 + time_step_num)],
                         row['att' + str(630 + time_step_num)]
                     ]
-                    time_frame.append(time_step)
-
-                    if time_step_num % frame_length == 0:
-                        time_sequence.append(time_frame)
-                        time_frame = []
+                    time_sequence.append(time_step)
 
                 class_encoding: ClassEncoding = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
                 class_encoding[int(row['target']) - 1] = 1.0

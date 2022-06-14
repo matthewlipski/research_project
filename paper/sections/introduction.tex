@@ -19,6 +19,21 @@ However, there are a few key challenges to this approach which stand in the way 
     However, the user should not perceive any lag while using the system for a positive experience.
 \end{enumerate}
 
+\subsection{Research Question}\label{subsec:research-question}
+Given the challenges in developing a neural network for gesture recognition, the goal of this paper can be summarized with the following research question:
+
+\textbf{'Which neural network architecture is most appropriate for recognizing hand gestures on an Arduino Nano 33 BLE, using 3D-formatted data from OPT101 photodiodes?'}
+
+This can then be segmented into the following sub-questions:
+\begin{enumerate}
+    \item Which neural network architectures produce the highest accuracy for hand gesture recognition?
+    \item Which neural network architectures produce the lowest latency for hand gesture recognition?
+    \item What is the minimum acceptable accuracy for recognizing hand gestures on an Arduino Nano 33 BLE?
+    \item What is the maximum acceptable latency for recognizing hand gestures on an Arduino Nano 33 BLE?
+    \item How can 3D-formatting data be exploited for better gesture recognition performance?
+\end{enumerate}
+
+\subsection{Contributions}\label{subsec:contributions}
 This research overcomes these challenges by using data from OPT101 photodiodes, which is fed into a neural network to recognize gestures with high accuracy and low latency on an Arduino Nano 33 BLE microcontroller.
 It is also part of a larger project which integrates this neural network into a full gesture recognition system, which is elaborated on in section 3.2.
 
@@ -31,20 +46,6 @@ Similar research which involves using photodiodes and machine learning to recogn
 \end{enumerate}
 
 A discussion regarding existing research in this field is found in section~\ref{sec:related-work}, which provides more context to these improvements.
-
-\subsection{Research Question}\label{subsec:research-question}
-Given the challenges overcome and contributions to the field made, the goal of this paper can be summarized with the following research question:
-
-\textbf{"Which neural network architecture is most appropriate for recognizing hand gestures on an Arduino Nano 33 BLE, using 3D-formatted data from OPT101 photodiodes?"}
-
-This can then be segmented into the following sub-questions:
-\begin{enumerate}
-    \item Which neural network architectures produce the highest accuracy for hand gesture recognition?
-    \item Which neural network architectures produce the lowest latency for hand gesture recognition?
-    \item What is the minimum acceptable accuracy for recognizing hand gestures on an Arduino Nano 33 BLE?
-    \item What is the maximum acceptable latency for recognizing hand gestures on an Arduino Nano 33 BLE?
-    \item How can 3D-formatting data be exploited for better gesture recognition performance?
-\end{enumerate}
 
 %The planned use case for this technology is hands-free navigation of menus which has especially gained relevance due to the restrictions imposed during the COVID-19 pandemic, which has showed that gestures can be an appealing alternative to physical buttons in social settings.
 %The most important existing literature for this research comes from Pete Warden and Daniel Situnayake, who are pioneers in the field of embedded AI and authors of the book "TinyML: Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers"\cite{warden2020tinyml}, as well as Qing Wang and Marco Zuniga, who have laid the groundwork for embedded AI specifically in the context of hand gesture recognition\cite{10.1145/3412449.3412551}.

@@ -10,10 +10,10 @@ from models import *
 
 if __name__ == '__main__':
     DATA_SET_NAME: str = 'final'
-    FRAME_LENGTH: int = 20
+    FRAME_LENGTH: int = 10
 
-    MODEL_NAME: str = 'lstm'
-    NUM_NEURONS: int = 32
+    MODEL_NAME: str = 'conv_2d'
+    NUM_NEURONS: int = 128
 
     BATCH_SIZE: int = 32
     NUM_EPOCHS: int = 1000000
@@ -37,10 +37,10 @@ if __name__ == '__main__':
         save_best_only=True
     )
 
-    data_set: DataSet = load_data_set(DATA_SET_NAME, FRAME_LENGTH)
+    data_set: DataSet = load_data_set(DATA_SET_NAME)
     data_set = normalize_data_set(data_set)
-    plot_example_data(data_set)
-    data_set = flatten_data_set(data_set)
+    # data_set = split_data_set(data_set, FRAME_LENGTH)
+    # data_set = flatten_data_set(data_set)
 
     folded_data_set: List[Tuple[DataSet, DataSet]] = fold_data_set(data_set, NUM_VALIDATION_FOLDS)
     data_set_info = get_data_set_info(data_set)

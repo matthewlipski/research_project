@@ -81,12 +81,36 @@ def normalize_data_set(data_set: DataSet) -> DataSet:
 
     x = (x - min_value) / (max_value - min_value)
 
-    normalized_data_set: DataSet = []
+    new_data_set: DataSet = []
 
     for i in range(len(data_set)):
-        normalized_data_set.append(DataInstance(x[i], y[i]))
+        new_data_set.append(DataInstance(x[i], y[i]))
 
-    return normalized_data_set
+    return new_data_set
+
+
+def split_data_set(data_set: DataSet, frame_size: int) -> DataSet:
+    """
+    Splits all instances of a dataset into frames of a predetermined size.
+    :param data_set: The dataset to flatten.
+    :param frame_size: The size that each frame should be.
+
+    :return: The split dataset if the size of each instance sequence is divisible by the selected frame size.
+    """
+    new_data_set: DataSet = []
+
+    for data_instance in data_set:
+        if len(data_instance.time_sequence) % frame_size != 0:
+            return data_set
+
+        split_time_sequence: TimeSequence3D = np.array_split(
+            data_instance.time_sequence,
+            int(len(data_instance.time_sequence) / frame_size)
+        )
+
+        new_data_set.append(DataInstance(split_time_sequence, data_instance.class_encoding))
+
+    return new_data_set
 
 
 def flatten_data_set(data_set: DataSet) -> DataSet:
@@ -104,7 +128,7 @@ def flatten_data_set(data_set: DataSet) -> DataSet:
     if type(data_set[0].time_sequence) == TimeSequence2D:
         return data_set
 
-    flattened_data_set: DataSet = []
+    new_data_set: DataSet = []
 
     for data_instance in data_set:
         flattened_time_sequence: TimeSequence2D = []
@@ -118,9 +142,9 @@ def flatten_data_set(data_set: DataSet) -> DataSet:
 
             flattened_time_sequence.append(frame_vector)
 
-        flattened_data_set.append(DataInstance(flattened_time_sequence, data_instance.class_encoding))
+        new_data_set.append(DataInstance(flattened_time_sequence, data_instance.class_encoding))
 
-    return flattened_data_set
+    return new_data_set
 
 
 def fold_data_set(data_set: DataSet, num_folds: int) -> List[Tuple[DataSet, DataSet]]:
@@ -184,18 +208,17 @@ def plot_example_data(data_set: DataSet) -> None:
 
     :param data_set: The dataset to plot an instance from.
     """
-    random_index: int = randrange(len(data_set))
+    random_index: int = 10
     data_instance = data_set[random_index]
 
     x_dim = []
     y_dim = []
     z_dim = []
 
-    for time_frame in data_instance.time_sequence:
-        for time_step in time_frame:
-            x_dim.append(time_step[0])
-            y_dim.append(time_step[1])
-            z_dim.append(time_step[2])
+    for time_step in data_instance.time_sequence:
+        x_dim.append(time_step[0])
+        y_dim.append(time_step[1])
+        z_dim.append(time_step[2])
 
     class_num: str = str(np.argmax(data_instance.class_encoding))
 
