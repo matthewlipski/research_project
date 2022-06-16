@@ -82,11 +82,11 @@ def load_data_set(data_set_name: str) -> DataSet:
                 class_encoding: ClassEncoding = [0.0] * num_classes
                 class_encoding[class_index] = 1.0
 
-                data_set.append(DataInstance(time_sequence[::5], class_encoding))
+                data_set.append(DataInstance(time_sequence, class_encoding))
 
         for i in range(len(class_indices[data_set_name])):
             # for file_name in os.listdir(data_set_path + class_indices[data_set_name][i] + 'left_hand/'):
-            for j in range(30, 49):
+            for j in range(1, 29):
                 if j != 5 and j != 6:
                     left_hand_class_data = load_pickle(
                         data_set_path +
@@ -98,7 +98,7 @@ def load_data_set(data_set_name: str) -> DataSet:
                     add_data(left_hand_class_data, len(class_indices[data_set_name]), i)
 
             # for file_name in os.listdir(data_set_path + class_indices[data_set_name][i] + 'right_hand/'):
-            for j in range(30, 49):
+            for j in range(1, 29):
                 if j != 5 and j != 6:
                     right_hand_class_data = load_pickle(
                         data_set_path +
