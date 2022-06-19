@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.4.5)  14 JUN 2022 15:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.6)  19 JUN 2022 04:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -393,46 +393,69 @@ ocal/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 
 ]) (sections/background.tex
-<figures/ann.png, id=163, 695.59875pt x 335.00156pt>
+Underfull \hbox (badness 1009) in paragraph at lines 7--11
+\OT1/ptm/m/n/10 learn-ing model which draw in-spi-ra-tion from the hu-man
+ []
+
+<figures/ann.png, id=171, 695.59875pt x 335.00156pt>
 File: figures/ann.png Graphic file (type png)
 <use figures/ann.png>
-Package pdftex.def Info: figures/ann.png  used on input line 16.
+Package pdftex.def Info: figures/ann.png  used on input line 15.
 (pdftex.def)             Requested size: 243.91125pt x 117.46698pt.
-
 [2 <./figures/ann.png>]
-<figures/3d_data.png, id=187, 880.03781pt x 255.95625pt>
+<figures/3d_data.png, id=195, 852.93657pt x 252.945pt>
 File: figures/3d_data.png Graphic file (type png)
 <use figures/3d_data.png>
-Package pdftex.def Info: figures/3d_data.png  used on input line 61.
-(pdftex.def)             Requested size: 243.91125pt x 70.94081pt.
+Package pdftex.def Info: figures/3d_data.png  used on input line 60.
+(pdftex.def)             Requested size: 243.91125pt x 72.33322pt.
 ) (sections/system_overview.tex
-<figures/system_advanced.png, id=189, 800.9925pt x 533.74406pt>
+<figures/gestures.png, id=197, 971.88094pt x 338.76563pt>
+File: figures/gestures.png Graphic file (type png)
+<use figures/gestures.png>
+Package pdftex.def Info: figures/gestures.png  used on input line 20.
+(pdftex.def)             Requested size: 243.91125pt x 85.01685pt.
+<figures/system_advanced.png, id=198, 784.43062pt x 525.46312pt>
 File: figures/system_advanced.png Graphic file (type png)
 <use figures/system_advanced.png>
-Package pdftex.def Info: figures/system_advanced.png  used on input line 20.
-(pdftex.def)             Requested size: 243.91125pt x 162.52701pt.
-)
-(sections/model_design.tex [3 <./figures/3d_data.png> <./figures/system_advance
-d.png>]
+Package pdftex.def Info: figures/system_advanced.png  used on input line 28.
+(pdftex.def)             Requested size: 243.91125pt x 163.38899pt.
+ [3 <./figures/3d_data.png> <./figures/gestures.png> <./figures/system_advanced
+.png>])
+(sections/model_design.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 3
-8.
+ [4]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 4
+1.
 
 (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ))
-(sections/model_implementation.tex [4]) (sections/results.tex)
-(sections/related_work.tex) (sections/responsible_research.tex)
-Underfull \vbox (badness 10000) has occurred while \output is active []
+(sections/model_implementation.tex) (sections/results.tex
 
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 17.
 
+<figures/latency_results.png, id=236, 698.61pt x 431.36156pt>
+File: figures/latency_results.png Graphic file (type png)
+<use figures/latency_results.png>
+Package pdftex.def Info: figures/latency_results.png  used on input line 43.
+(pdftex.def)             Requested size: 243.91125pt x 150.60362pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 64.
+
+) (sections/related_work.tex) (sections/responsible_research.tex)
 (sections/conclusion.tex) (paper.bbl
 Underfull \hbox (badness 6592) in paragraph at lines 20--26
 []\OT1/ptm/m/n/10 Robert David, Jared Duke, Ad-vait Jain, Vi-jay
  []
 
-[5]
+[6 <./figures/latency_results.png>]
 Underfull \hbox (badness 1533) in paragraph at lines 69--72
 \OT1/ptm/m/n/10 Uszko-r-eit, Llion Jones, Aidan N. Gomez, Lukasz
  []
@@ -442,31 +465,32 @@ Underfull \hbox (badness 1264) in paragraph at lines 85--91
 []\OT1/ptm/m/n/10 At^^Pf Emre Y[]uksel, Ya[]ar Alim T[]urkmen, Arzu-can
  []
 
-) [6
+) [7
 
 ] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: ED2804531F4CD0E78FE9F7B98407ACCF;5095.
+(rerunfilecheck)             Checksum: 582021B975E0DDF83C737DCFB9360ABA;4995.
  ) 
 Here is how much of TeX's memory you used:
- 10710 strings out of 478582
- 176323 string characters out of 2844345
- 468598 words of memory out of 3000000
- 28662 multiletter control sequences out of 15000+600000
+ 10751 strings out of 478582
+ 177144 string characters out of 2844345
+ 469087 words of memory out of 3000000
+ 28691 multiletter control sequences out of 15000+600000
  484297 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,6n,63p,552b,441s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 60i,8n,63p,552b,441s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:
 /Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi1
 0.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmr10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
-es/utmb8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
-es/utmr8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
-es/utmri8a.pfb>
+/cm/cmr10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type
+1/urw/times/utmb8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type
+1/urw/times/utmr8a.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type
+1/urw/times/utmri8a.pfb>
 Output written on C:/Users\matth\Downloads\research_project\paper\out\paper.pdf
- (6 pages, 411394 bytes).
+ (7 pages, 518896 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 76 named destinations out of 1000 (max. 500000)
- 296 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 313 PDF objects out of 1000 (max. 8388607)
+ 86 named destinations out of 1000 (max. 500000)
+ 322 words of extra memory for PDF output out of 10000 (max. 10000000)
 

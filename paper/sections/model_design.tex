@@ -15,9 +15,12 @@ Given that LSTMs and GRUs are should yield better classification performance tha
 
 One issue of using LSTMs and GRUs, however, is that they only accept a single data sequence with multiple features as input, in which each time step contains a single value from each feature, i.e.\ a 1D array.
 This is relevant as with 3D-formatted data, each time step is a 2D frame - not a 1D array.
-Therefore, each frame has to be flattened first, which causes a loss of spacial \& temporal information.
-This issue can be solved by using convolutional LSTMs, which use convolutional kernels in place of traditional neurons~\cite{https://doi.org/10.48550/arxiv.1506.04214}, which allow each frame to be correctly processed as a 2D image.
-Due to this, both 1D and 2D convolutional LSTMs were investigated for this paper, with the main difference being that the former performs 1D convolutions on each row of the frame individually, therefore keeping the data from each photodiode separate, while the latter performs 2D convolutions on the entire frame.
+Therefore, each frame has to be flattened first, which causes a loss of spacial information.
+This issue can be solved by using a convolutional neural network (CNN) to remove noise from the input data and extract features, which are then fed into the LSTM~\cite{KIM201972}.
+CNNs accept 2D images as input, which means that frames do not have to be flattened.
+By using convolutional and pooling layers, the resolution of this image can be reduced to just a single value for each neuron in the final layer of the CNN\@.
+Therefore, the final CNN layer effectively outputs a 1D array with a size equal to the number of neurons in it, which can then be used as input to the LSTM with no loss in spacial information.
+Due to this, the CNN-LSTM architecture was also investigated in this study.
 
 Finally, transformer encoders were also tested for this project as a novel alternative to RNN based architectures.
 Transformers use a concept called self-attention which identifies which elements in a sequence carry most semantic value based on the other elements of the sequence~\cite{https://doi.org/10.48550/arxiv.1706.03762}
@@ -36,12 +39,15 @@ These are outlined below:
 \subsubsection{All Architectures}
 \begin{itemize}
     \item Frame size
-    \item Number of neurons in hidden layer
+    \item Number of layers
+    \item Number of neurons per layer
 \end{itemize}
 
-\subsubsection{Convolutional LSTMs}
+\subsubsection{CNN+LSTM}
 \begin{itemize}
-    \item Filter kernel size
+    \item Number of convolutional layers
+    \item Number of neurons per convolutional layer
+    \item Filter kernel sizes
 \end{itemize}
 
 \subsubsection{Transformer Encoder}
@@ -50,8 +56,4 @@ These are outlined below:
 \end{itemize}
 
 In reality, there are more parameters that could be tuned, but the ones listed above are likely to have the largest impact on final model performance.
-
-It is also worth mentioning why hidden layer count and training time are not included in the parameter tuning.
-Each architecture is restricted to a single hidden layer to minimize latency, but also because the relative simplicity of the input data should not require more than a single hidden layer to achieve high accuracy.
-Training time, meanwhile, is controlled to ensure fairness when testing validation accuracy across the various neural network architectures.
-More detail regarding how this is done can be found in section~\ref{subsec:testing-methodology}.
+This paper does not go into detail regarding the testing of different parameters to determine which combinations yield optimal performance, but the final parameter values are stated in section~\ref{subsec:accuracy-testing-results}.

@@ -10,43 +10,43 @@ Warning--empty publisher in inbook
 Warning--empty journal in article
 You've used 15 entries,
             2118 wiz_defined-function locations,
-            591 strings with 7066 characters,
-and the built_in function-call counts, 6097 in all, are:
-= -- 559
-> -- 369
+            594 strings with 6969 characters,
+and the built_in function-call counts, 6040 in all, are:
+= -- 561
+> -- 349
 < -- 6
-+ -- 144
-- -- 129
-* -- 451
-:= -- 1003
-add.period$ -- 44
++ -- 136
+- -- 121
+* -- 444
+:= -- 993
+add.period$ -- 45
 call.type$ -- 15
-change.case$ -- 105
+change.case$ -- 101
 chr.to.int$ -- 0
 cite$ -- 18
-duplicate$ -- 215
-empty$ -- 433
-format.name$ -- 129
-if$ -- 1274
+duplicate$ -- 219
+empty$ -- 435
+format.name$ -- 121
+if$ -- 1267
 int.to.chr$ -- 0
 int.to.str$ -- 15
-missing$ -- 16
-newline$ -- 76
+missing$ -- 17
+newline$ -- 77
 num.names$ -- 32
-pop$ -- 135
+pop$ -- 124
 preamble$ -- 1
-purify$ -- 93
+purify$ -- 89
 quote$ -- 0
 skip$ -- 166
 stack$ -- 0
-substring$ -- 319
+substring$ -- 334
 swap$ -- 61
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 54
 warning$ -- 3
-while$ -- 49
+while$ -- 50
 width$ -- 17
-write$ -- 160
+write$ -- 163
 (There were 3 warnings)

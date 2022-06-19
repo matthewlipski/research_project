@@ -27,9 +27,9 @@ Given the challenges in developing a neural network for gesture recognition, the
 This can then be segmented into the following sub-questions:
 \begin{enumerate}
     \item Which neural network architectures produce the highest accuracy for hand gesture recognition?
-    \item Which neural network architectures produce the lowest latency for hand gesture recognition?
+    \item Which neural network architectures produce the lowest inference latency for hand gesture recognition?
     \item What is the minimum acceptable accuracy for recognizing hand gestures on an Arduino Nano 33 BLE?
-    \item What is the maximum acceptable latency for recognizing hand gestures on an Arduino Nano 33 BLE?
+    \item What is the maximum acceptable inference latency for recognizing hand gestures on an Arduino Nano 33 BLE?
     \item How can 3D-formatting data be exploited for better gesture recognition performance?
 \end{enumerate}
 
@@ -42,7 +42,7 @@ Similar research which involves using photodiodes and machine learning to recogn
     \item A high level of accuracy is maintained with fewer photodiodes, and therefore fewer model input features, than existing solutions.
     \item The data from photodiodes is 3D-formatted, which better preserves temporal information and improves recognition accuracy.
     An explanation for what 3D-formatting involves can be found in section~\ref{subsec:3d-formatted-data}.
-    \item The neural network used to classify hand gestures is shallower than competing solutions, leading to reduced system latency while maintaining a high level of accuracy.
+    \item The neural network used to classify hand gestures is smaller in size than competing solutions, leading to reduced system latency.
 \end{enumerate}
 
 A discussion regarding existing research in this field is found in section~\ref{sec:related-work}, which provides more context to these improvements.

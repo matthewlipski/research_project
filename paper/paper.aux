@@ -43,7 +43,6 @@
 \newlabel{subsec:machine-learning-on-microcontrollers}{{2.2}{2}{Neural Networks on Embedded Hardware}{subsection.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Hand Gesture Data}{2}{subsection.2.3}\protected@file@percent }
 \newlabel{subsec:hand-gesture-data}{{2.3}{2}{Hand Gesture Data}{subsection.2.3}{}}
-\citation{HUSKEN2003223}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}3D-Formatted Data}{3}{subsection.2.4}\protected@file@percent }
 \newlabel{subsec:3d-formatted-data}{{2.4}{3}{3D-Formatted Data}{subsection.2.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Visualization of 2D photodiode data after being 3D-formatted into 5 frames.\relax }}{3}{figure.caption.2}\protected@file@percent }
@@ -51,29 +50,42 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}System Overview}{3}{section.3}\protected@file@percent }
 \newlabel{sec:system-overview}{{3}{3}{System Overview}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Full Gesture Recognition System}{3}{subsection.3.1}\protected@file@percent }
-\newlabel{subsec:full-gesture-recognition-system}{{3.1}{3}{Full Gesture Recognition System}{subsection.3.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Visualization of the inputs \& outputs for a generic neural network in the gesture recognition system.\relax }}{3}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:system}{{3}{3}{Visualization of the inputs \& outputs for a generic neural network in the gesture recognition system.\relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dataset}{3}{subsection.3.2}\protected@file@percent }
-\newlabel{subsec:dataset}{{3.2}{3}{Dataset}{subsection.3.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Model Design}{3}{section.4}\protected@file@percent }
-\newlabel{sec:model-design}{{4}{3}{Model Design}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Neural Network Architectures Tested}{3}{subsection.4.1}\protected@file@percent }
-\newlabel{subsec:architectures-tested}{{4.1}{3}{Neural Network Architectures Tested}{subsection.4.1}{}}
+\newlabel{subsec:full-gesture-recognition-pipeline}{{3.1}{3}{Full Gesture Recognition System}{subsection.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Illustrations of the 10 different gestures that the system can recognize.\relax }}{3}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:gestures}{{3}{3}{Illustrations of the 10 different gestures that the system can recognize.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visualization of the input features \& output classes using a generic artificial neural network as an example.\relax }}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:system}{{4}{3}{Visualization of the input features \& output classes using a generic artificial neural network as an example.\relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}System Caveats}{3}{subsection.3.2}\protected@file@percent }
+\newlabel{subsec:system-caveats}{{3.2}{3}{System Caveats}{subsection.3.2}{}}
+\citation{HUSKEN2003223}
 \citation{DBLP:journals/corr/abs-1801-06105}
-\citation{https://doi.org/10.48550/arxiv.1506.04214}
+\citation{KIM201972}
 \citation{https://doi.org/10.48550/arxiv.1706.03762}
 \citation{yuksel-etal-2019-turkish}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Parameter Tuning}{4}{subsection.4.2}\protected@file@percent }
-\newlabel{subsec:frame-size}{{4.2}{4}{Parameter Tuning}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{All Architectures}{4}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Convolutional LSTMs}{4}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Transformer Encoder}{4}{section*.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Model Implementation}{4}{section.5}\protected@file@percent }
-\newlabel{sec:model-implementation}{{5}{4}{Model Implementation}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Training Code}{4}{subsection.5.1}\protected@file@percent }
-\newlabel{subsec:training-code}{{5.1}{4}{Training Code}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dataset}{4}{subsection.3.3}\protected@file@percent }
+\newlabel{subsec:dataset}{{3.3}{4}{Dataset}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Model Design}{4}{section.4}\protected@file@percent }
+\newlabel{sec:model-design}{{4}{4}{Model Design}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Neural Network Architectures Tested}{4}{subsection.4.1}\protected@file@percent }
+\newlabel{subsec:architectures-tested}{{4.1}{4}{Neural Network Architectures Tested}{subsection.4.1}{}}
 \citation{warden2020tinyml}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Parameter Tuning}{5}{subsection.4.2}\protected@file@percent }
+\newlabel{subsec:frame-size}{{4.2}{5}{Parameter Tuning}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{All Architectures}{5}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{CNN+LSTM}{5}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Transformer Encoder}{5}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Model Implementation}{5}{section.5}\protected@file@percent }
+\newlabel{sec:model-implementation}{{5}{5}{Model Implementation}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Training Code}{5}{subsection.5.1}\protected@file@percent }
+\newlabel{subsec:training-code}{{5.1}{5}{Training Code}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Inference Code}{5}{subsection.5.2}\protected@file@percent }
+\newlabel{subsec:inference-code}{{5.2}{5}{Inference Code}{subsection.5.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{5}{section.6}\protected@file@percent }
+\newlabel{sec:results}{{6}{5}{Results}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Inference Latency Testing}{5}{subsection.6.1}\protected@file@percent }
+\newlabel{subsec:inference-latency-testing}{{6.1}{5}{Inference Latency Testing}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Methodology}{5}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Results}{5}{section*.10}\protected@file@percent }
 \citation{JMLR:v15:srivastava14a}
 \citation{inbook}
 \bibstyle{plain}
@@ -82,37 +94,35 @@
 \bibcite{8342164}{2}
 \bibcite{inbook}{3}
 \bibcite{MLSYS2021_d2ddea18}{4}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Table comparing the file sizes and inference latencies of various TensorFlow Lite artificial neural networks.\relax }}{6}{table.caption.9}\protected@file@percent }
+\newlabel{tab:ann_configs}{{1}{6}{Table comparing the file sizes and inference latencies of various TensorFlow Lite artificial neural networks.\relax }{table.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Graph showing the relationship between file size and inference latency for various TensorFlow Lite artificial neural networks.\relax }}{6}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:latency_results}{{5}{6}{Graph showing the relationship between file size and inference latency for various TensorFlow Lite artificial neural networks.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Accuracy Testing}{6}{subsection.6.2}\protected@file@percent }
+\newlabel{subsec:accuracy-testing}{{6.2}{6}{Accuracy Testing}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Methodology}{6}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Accuracy Testing}{6}{section.7}\protected@file@percent }
+\newlabel{subsec:accuracy-testing-results}{{7}{6}{Accuracy Testing}{section.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{RNN}{6}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{LSTM}{6}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{GRU}{6}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{CNN+LSTM}{6}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Transformer Encoder}{6}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Related Work}{6}{section.8}\protected@file@percent }
+\newlabel{sec:related-work}{{8}{6}{Related Work}{section.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Responsible Research}{6}{section.9}\protected@file@percent }
+\newlabel{sec:responsible-research}{{9}{6}{Responsible Research}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{6}{section.10}\protected@file@percent }
+\newlabel{sec:conclusion}{{10}{6}{Conclusion}{section.10}{}}
 \bibcite{8947919}{5}
 \bibcite{DBLP:journals/corr/abs-1801-06105}{6}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Inference Code}{5}{subsection.5.2}\protected@file@percent }
-\newlabel{subsec:inference-code}{{5.2}{5}{Inference Code}{subsection.5.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{5}{section.6}\protected@file@percent }
-\newlabel{sec:results}{{6}{5}{Results}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Testing Methodology}{5}{subsection.6.1}\protected@file@percent }
-\newlabel{subsec:testing-methodology}{{6.1}{5}{Testing Methodology}{subsection.6.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Accuracy Testing Methodology}{5}{section*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Latency Testing Methodology}{5}{section*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Testing Results}{5}{subsection.6.2}\protected@file@percent }
-\newlabel{subsec:testing-results}{{6.2}{5}{Testing Results}{subsection.6.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{RNN}{5}{section*.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{LSTM}{5}{section*.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{GRU}{5}{section*.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{1D Convolutional LSTM}{5}{section*.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{2D Convolutional LSTM}{5}{section*.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Transformer Encoder}{5}{section*.14}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{5}{section.7}\protected@file@percent }
-\newlabel{sec:related-work}{{7}{5}{Related Work}{section.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Responsible Research}{5}{section.8}\protected@file@percent }
-\newlabel{sec:responsible-research}{{8}{5}{Responsible Research}{section.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{5}{section.9}\protected@file@percent }
-\newlabel{sec:conclusion}{{9}{5}{Conclusion}{section.9}{}}
 \bibcite{HUSKEN2003223}{7}
-\bibcite{article}{8}
-\bibcite{4912759}{9}
-\bibcite{https://doi.org/10.48550/arxiv.1506.04214}{10}
+\bibcite{KIM201972}{8}
+\bibcite{article}{9}
+\bibcite{4912759}{10}
 \bibcite{JMLR:v15:srivastava14a}{11}
 \bibcite{https://doi.org/10.48550/arxiv.1706.03762}{12}
 \bibcite{Wang2003}{13}
 \bibcite{warden2020tinyml}{14}
 \bibcite{yuksel-etal-2019-turkish}{15}
-\gdef \@abspage@last{6}
+\gdef \@abspage@last{7}

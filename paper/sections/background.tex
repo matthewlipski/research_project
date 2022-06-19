@@ -2,13 +2,12 @@
 \subsection{Machine Learning \& Artificial Neural Networks}\label{subsec:machine-learning-and-neural-networks}
 Machine learning is a sub-field of artificial intelligence which "provides learning capability to computers
 without being explicitly programmed"~\cite{Alzubi_2018}.
-More specifically, machine learning allows computers to "learn" patterns and trends from existing data in order to make accurate predictions on new, unseen data.
+More specifically, machine learning allows computers to "learn" patterns and trends from existing data in order to make accurate predictions on new data, without any human input.
 
-Artificial neural networks (ANNs), meanwhile, are a type of machine learning model which draws inspiration from the human brain~\cite{Wang2003}.
+Artificial neural networks (ANNs) are a type of machine learning model which draw inspiration from the human brain~\cite{Wang2003}.
 These types of models feature "neurons" organized into densely connected layers.
 The first layer, which takes in the input data, is known as the input layer while the final layer, which yields the processed output data, is called the output layer.
-In between these is at least one hidden layer.
-In general, having more hidden layers and more neurons in hidden layers allows a neural network to model increasingly complex functions.
+In between these is at least one hidden layer and in general, having more hidden layers and more neurons per hidden layer allows a neural network to approximate increasingly complex functions.
 
 \begin{figure}[h]
     \centering
@@ -26,11 +25,15 @@ Although ANNs are no longer considered state-of-the-art, understanding the purpo
 
 \subsection{Neural Networks on Embedded Hardware}\label{subsec:machine-learning-on-microcontrollers}
 Machine learning, and specifically neural networks, have traditionally been restricted to the realms of high-performance and in turn, high power devices~\cite{8342164}.
-Unfortunately, this means that it has been previously unfeasible to use these technologies with embedded hardware such as microcontrollers, as they lack the performance to run inference on neural networks locally, and the dedicated power to be able to transmit sensor data to a remote processor.
+Unfortunately, this means that it has been previously impractical to use these technologies with embedded hardware such as microcontrollers, as they lack the memory \& performance to run inference on neural networks locally, while using a remote processor for inference is not always feasible.
 
-However, recent advances into machine learning model compression and optimization have changed this, allowing deep neural networks to be run on devices even powered by coin batteries.
+However, recent advances into machine learning model compression and optimization have changed this, allowing deep neural networks with multiple hidden layers to be run on devices even powered by coin batteries.
 The most prominent development in this field has been TensorFlow Lite for Microcontrollers, which is a Python framework specifically made for optimizing and running neural networks on microcontrollers~\cite{MLSYS2021_d2ddea18}.
-The original Tensorflow has been an extremely popular machine learning framework for over a decade, but the extension to make it work effectively on microcontrollers has only been developed in recent years.
+This framework introduces two key methods of optimizing neural networks which makes it possible to deploy them on embedded hardware.
+The first of these is quantization, which allows converts all 32-bit floating point values and operations in a network to 8-bit integers.
+This includes neuron weights, activation functions, input data, and more, resulting in a tremendous improvement to the size of the neural network in memory as well as its runtime.
+The second optimization involves loading only the tensor operations that are needed for the neural network.
+For example, a neural network might not use any ReLU activation functions or 2D-convolution operations, so these are simply not loaded.
 
 \subsection{Hand Gesture Data}\label{subsec:hand-gesture-data}
 In this research, neural networks are used to detect gestures, but to do this, data from some sensor(s) must be fed into the network.

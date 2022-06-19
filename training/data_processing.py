@@ -7,12 +7,16 @@ import numpy as np
 
 # Single 1D time step with a value for each feature.
 TimeStep = List[float]
+
 # N 1D time steps concatenated into a 2D frame.
 TimeFrame = List[TimeStep]
+
 # All 1D time steps concatenated into a 2D sequence.
 TimeSequence2D = List[TimeStep]
+
 # All 2D frames concatenated into a 3D sequence.
 TimeSequence3D = List[TimeFrame]
+
 # One-hot encoding of the data classes.
 ClassEncoding = List[float]
 
@@ -125,7 +129,8 @@ def flatten_data_set(data_set: DataSet) -> DataSet:
 
     :return: The flattened dataset if the input dataset is 3D-formatted, or the original dataset otherwise.
     """
-    if type(data_set[0].time_sequence) == TimeSequence2D:
+    if type(data_set[0].time_sequence[0][0]) == np.float64:
+        print(type(data_set[0].time_sequence[0][0]))
         return data_set
 
     new_data_set: DataSet = []

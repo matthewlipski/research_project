@@ -41,6 +41,12 @@ Michael Hüsken and Peter Stagge.
 \newblock Recurrent neural networks for time series classification.
 \newblock {\em Neurocomputing}, 50:223--235, 2003.
 
+\bibitem{KIM201972}
+Tae-Young Kim and Sung-Bae Cho.
+\newblock Predicting residential energy consumption using cnn-lstm neural
+  networks.
+\newblock {\em Energy}, 182:72--81, 2019.
+
 \bibitem{article}
 Herve Lahamy and Derek Lichti.
 \newblock Real-time hand gesture recognition using range cameras.
@@ -52,12 +58,6 @@ Jiayang Liu, Zhen Wang, Lin Zhong, Jehan Wickramasuriya, and Venu Vasudevan.
   applications.
 \newblock In {\em 2009 IEEE International Conference on Pervasive Computing and
   Communications}, pages 1--9, 2009.
-
-\bibitem{https://doi.org/10.48550/arxiv.1506.04214}
-Xingjian Shi, Zhourong Chen, Hao Wang, Dit-Yan Yeung, Wai-kin Wong, and
-  Wang-chun Woo.
-\newblock Convolutional lstm network: A machine learning approach for
-  precipitation nowcasting, 2015.
 
 \bibitem{JMLR:v15:srivastava14a}
 Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan
