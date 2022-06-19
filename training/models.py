@@ -27,8 +27,8 @@ def create_model(model_type: str,
         model.add(keras.layers.Dense(128))
 
     def rnn():
-        model.add(keras.layers.SimpleRNN(128, input_shape=(sequence_length, num_features), return_sequences=True))
-        model.add(keras.layers.SimpleRNN(128, input_shape=(sequence_length, num_features), return_sequences=True))
+        # model.add(keras.layers.SimpleRNN(128, input_shape=(sequence_length, num_features), return_sequences=True))
+        # model.add(keras.layers.SimpleRNN(128, input_shape=(sequence_length, num_features), return_sequences=True))
         model.add(keras.layers.SimpleRNN(128, input_shape=(sequence_length, num_features)))
 
     def gru():
@@ -38,7 +38,8 @@ def create_model(model_type: str,
         model.add(keras.layers.GRU(64, input_shape=(sequence_length, num_features)))
 
     def lstm():
-        model.add(keras.layers.LSTM(32, input_shape=(sequence_length, num_features)))
+        model.add(keras.layers.LSTM(128, input_shape=(sequence_length, num_features), return_sequences=True))
+        model.add(keras.layers.LSTM(64, input_shape=(sequence_length, num_features)))
         # model.add(keras.layers.Dropout(0.5))
         # model.add(keras.layers.LSTM(num_neurons, return_sequences=True))
         # model.add(keras.layers.Dropout(0.5))
@@ -58,13 +59,13 @@ def create_model(model_type: str,
 
     def conv_lstm():
         model.add(keras.layers.TimeDistributed(keras.layers.Reshape((5, 3, 1))))
-        model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(8, 2, activation='relu')))
+        model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(128, 2, activation='relu')))
         model.add(keras.layers.Dropout(0.25))
-        model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(8, 2, activation='relu')))
+        model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(128, 2, activation='relu')))
         model.add(keras.layers.Dropout(0.25))
         # model.add(keras.layers.TimeDistributed(keras.layers.MaxPooling2D(pool_size=(3, 1))))
         # model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(16, kernel_size=(5, 1), activation='relu')))
-        model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(4, kernel_size=(3, 1), activation='relu')))
+        model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(64, kernel_size=(3, 1), activation='relu')))
 
         # model.add(keras.layers.TimeDistributed(keras.layers.Reshape((20, 3, 1))))
         # model.add(keras.layers.TimeDistributed(keras.layers.Conv2D(64, (3, 1), activation='relu')))
@@ -74,8 +75,8 @@ def create_model(model_type: str,
         # model.add(keras.layers.TimeDistributed(keras.layers.Reshape((20, 3, 1))))
         # model.add(keras.layers.Flatten())
 
-        model.add(keras.layers.Reshape((20, 4)))
-        model.add(keras.layers.LSTM(4))
+        model.add(keras.layers.Reshape((20, 64)))
+        model.add(keras.layers.LSTM(64))
 
     def transformer():
         def transformer_encoder(inputs):

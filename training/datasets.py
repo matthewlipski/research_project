@@ -80,7 +80,7 @@ def load_data_set() -> DataSet:
     }
 
     # Loads dataset and shuffles the order of data instances for each candidate.
-    for candidate_num in range(1, 50):
+    for candidate_num in range(1, 29):
         if candidate_num != 5 and candidate_num != 6:
             candidate_data: DataSet = []
             for gesture_num in range(len(gestures)):
@@ -100,6 +100,7 @@ def load_data_set() -> DataSet:
                 candidate_gesture_data: List[List[List[int]]] = left_hand_gesture_data + right_hand_gesture_data
 
                 for instance_num, data_instance in enumerate(candidate_gesture_data):
+                    print(len(data_instance))
                     # Non-final dataset - data from candidates 1-29 recorded at 20Hz but the rest is at 100Hz.
                     if candidate_num >= 30:
                         candidate_data.append(
@@ -109,7 +110,7 @@ def load_data_set() -> DataSet:
                         candidate_data.append(
                             create_data_instance(data_instance, len(gestures), gesture_num, False)
                         )
-
+            print()
             random.shuffle(candidate_data)
             data_set += candidate_data
 

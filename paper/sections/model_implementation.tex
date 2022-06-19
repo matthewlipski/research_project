@@ -1,9 +1,9 @@
 \section{Model Implementation}\label{sec:model-implementation}
 \subsection{Training Code}\label{subsec:training-code}
-The implementation and testing of each neural network architecture was done using the TensorFlow Python library and high-level Keras API (version 2.9)\@.
+The implementation of each neural network architecture was done using the TensorFlow Python library and high-level Keras API (version 2.9), which were then converted into .
 While the dataset is split into training and validation sets when evaluating architecture performance, the final models to be deployed on Arduino are trained on all available data.
 
 \subsection{Inference Code}\label{subsec:inference-code}
-To run trained Keras/TensorFlow models on the Arduino Nano 33 BLE, they were first converted to TensorFlow Lite models with integer quantized parameters and arguments to optimize space and runtime performance.
+To run trained Keras/TensorFlow models on the Arduino Nano 33 BLE, they were first converted to TensorFlow Lite models files (.tflite extension) using the optimizations outlined in section~\ref{subsec:neural-networks-on-embedded-hardware}.
 The TensorFlow Lite models were then converted into C++ files so that they can be loaded and ran using TensorFlow Lite for Microcontrollers.
 This was done using the method detailed in chapter 4.5 of "TinyML Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers"~\cite{warden2020tinyml}.

@@ -34,8 +34,8 @@ def convert_model_to_tf_lite(keras_model: keras.models.Model) -> Union[object, b
 
 
 if __name__ == '__main__':
-    MODEL_NAME: str = 'rnn'
-    FRAME_LENGTH: int = 10
+    MODEL_NAME: str = 'conv_lstm'
+    FRAME_LENGTH: int = 5
 
     BATCH_SIZE: int = 32
     NUM_VALIDATION_FOLDS: int = 1
@@ -85,7 +85,7 @@ if __name__ == '__main__':
         fold_training_history = model.fit(
             x_training,
             y_training,
-            epochs=1,
+            epochs=1000000,
             batch_size=BATCH_SIZE,
             validation_data=(x_validation, y_validation),
             callbacks=[early_stop_cb]

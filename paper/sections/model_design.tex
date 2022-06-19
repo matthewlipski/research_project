@@ -1,13 +1,13 @@
 \section{Model Design}\label{sec:model-design}
 \subsection{Neural Network Architectures Tested}\label{subsec:architectures-tested}
 Recognizing hand gestures based on photodiode data can be thought of as a time-series classification task, which is a type of problem that recurrent neural networks (RNNs) are especially well suited for~\cite{HUSKEN2003223}.
-RNNs differ from conventional neural networks as they do not process the input in its entirety, but instead process each time step or sample from the input sequentially.
+RNNs differ from conventional neural networks as they do not process the input in its entirety, but instead process each time step, or sample, from the input sequentially.
 Each time step is used to update a "hidden state", which is fed back into the RNN along with the next time step.
-This gives RNNs the ability to exploit the time-sensitive nature of time-series data, as each time step also has temporal information associated with it.
+This makes RNNs suitable for operating on sequences, as the order of the data is considered as well as the content of the data, unlike typical ANNs.
 Thanks to this desirable property, RNNs were the first type of neural network tested.
 
 Although RNNs are highly suitable for time-series classification, they suffer from the "vanishing gradient problem", which has since been overcome by long short-term memory cells (LSTMs) and gated recurrent units (GRUs)~\cite{DBLP:journals/corr/abs-1801-06105}.
-To briefly explain this problem, the weight of the hidden state of a time step in an RNN tends to exponentially decrease for future time steps.
+To briefly explain this problem, time steps further in the past tend to have an exponentially lower weight in determining the hidden state, meaning that only the past few time steps are actually represented in the hidden state.
 This means that in practice, RNNs tend to ignore if earlier time steps are out of order, which limits performance for long data sequences.
 LSTMs and GRUs solve this issue using so-called "gates", which determine which contents of the previous hidden state should be kept and which contents of the current hidden state should be propagated to the next time step.
 This largely mitigates the vanishing gradient problem as only relevant information is kept, therefore greatly reducing the rate at which hidden state weights decay.
@@ -16,7 +16,7 @@ Given that LSTMs and GRUs are should yield better classification performance tha
 One issue of using LSTMs and GRUs, however, is that they only accept a single data sequence with multiple features as input, in which each time step contains a single value from each feature, i.e.\ a 1D array.
 This is relevant as with 3D-formatted data, each time step is a 2D frame - not a 1D array.
 Therefore, each frame has to be flattened first, which causes a loss of spacial information.
-This issue can be solved by using a convolutional neural network (CNN) to remove noise from the input data and extract features, which are then fed into the LSTM~\cite{KIM201972}.
+This issue can be solved by using a convolutional neural network (CNN) to first extract features from the input data, which are then fed into the LSTM~\cite{KIM201972}.
 CNNs accept 2D images as input, which means that frames do not have to be flattened.
 By using convolutional and pooling layers, the resolution of this image can be reduced to just a single value for each neuron in the final layer of the CNN\@.
 Therefore, the final CNN layer effectively outputs a 1D array with a size equal to the number of neurons in it, which can then be used as input to the LSTM with no loss in spacial information.
@@ -55,5 +55,6 @@ These are outlined below:
     \item Number of attention heads
 \end{itemize}
 
-In reality, there are more parameters that could be tuned, but the ones listed above are likely to have the largest impact on final model performance.
-This paper does not go into detail regarding the testing of different parameters to determine which combinations yield optimal performance, but the final parameter values are stated in section~\ref{subsec:accuracy-testing-results}.
+In reality, there are more parameters that could be tuned, but the ones listed above are likely to have the largest impact on final model
+Default values are used for parameters that are not mentioned in this section.
+This paper does not go into detail regarding the testing of different parameters to determine which combinations yield optimal performance, but the best performing parameter values found are stated in section~\ref{subsec:accuracy-testing}.
